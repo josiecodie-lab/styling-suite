@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Bridal Suite · The Styling Suite</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cream:#F8F4EF;--linen:#EDE8E0;--stone:#C9C2B6;--dusk:#8C8379;
+  --charcoal:#2E2A26;--ink:#1A1714;--blush:#E8C4BB;--rose:#C97B7B;
+  --gold:#C4A45A;
+  --serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost',sans-serif;
+}
+html,body{background:var(--cream);color:var(--ink);font-family:var(--sans);font-weight:300;-webkit-font-smoothing:antialiased}
+.page{max-width:480px;margin:0 auto;min-height:100vh;padding-bottom:56px}
+.topbar{padding:24px 24px 0;display:flex;justify-content:space-between;align-items:center}
+.back{font-size:11px;letter-spacing:.08em;color:var(--dusk);text-decoration:none}
+.back:hover{color:var(--charcoal)}
+.toplabel{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--stone)}
+.hero{padding:28px 24px 16px}
+.eyebrow{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--dusk);margin-bottom:8px}
+.htitle{font-family:var(--serif);font-size:34px;font-weight:300;line-height:1.1;margin-bottom:10px}
+.htitle em{font-style:italic}
+.hsub{font-size:12px;color:var(--dusk);line-height:1.7}
+.deco{margin:14px 24px;display:flex;align-items:center;gap:10px}
+.deco hr{flex:1;border:none;border-top:.5px solid var(--stone)}
+.deco span{width:4px;height:4px;background:var(--stone);transform:rotate(45deg);flex-shrink:0}
+.card{background:#fff;border:.5px solid var(--linen);border-radius:14px;padding:18px;margin:10px 24px 0}
+.ql{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--dusk);margin-bottom:5px}
+.qt{font-family:var(--serif);font-size:18px;font-weight:300;color:var(--ink);margin-bottom:12px;line-height:1.3}
+.qhint{font-size:11px;color:var(--stone);margin-bottom:12px;line-height:1.6;font-style:italic}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:11px;padding:6px 13px;border-radius:40px;border:.5px solid var(--stone);color:var(--dusk);cursor:pointer;transition:all .18s;user-select:none}
+.chip:hover{border-color:var(--charcoal);color:var(--charcoal)}
+.chip.sel{background:var(--charcoal);color:#fff;border-color:var(--charcoal)}
+.slist{display:flex;flex-direction:column;gap:7px}
+.sopt{border:.5px solid var(--linen);border-radius:10px;padding:11px 14px;cursor:pointer;font-size:12px;color:var(--charcoal);background:var(--cream);transition:all .18s;line-height:1.5}
+.sopt:hover{border-color:var(--stone)}
+.sopt.sel{border-color:var(--blush);background:#FDF5F2;color:var(--rose)}
+.sil-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.sil-card{border:.5px solid var(--linen);border-radius:12px;padding:10px 6px;text-align:center;cursor:pointer;transition:all .2s;background:var(--cream);user-select:none}
+.sil-card:hover{border-color:var(--stone)}
+.sil-card.sel{border-color:var(--blush);background:#FDF5F2}
+.sil-card svg{width:40px;height:64px;display:block;margin:0 auto 6px}
+.sil-name{font-size:9px;letter-spacing:.04em;color:var(--dusk)}
+.sil-card.sel .sil-name{color:var(--rose)}
+.cta{padding:14px 24px;display:flex;gap:10px}
+.btnp{flex:1;padding:13px;font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase;background:var(--charcoal);color:#fff;border:none;border-radius:10px;cursor:pointer;transition:all .2s}
+.btnp:hover{background:var(--ink)}
+.btnp:disabled{background:var(--stone);cursor:default}
+.btng{padding:13px 16px;font-family:var(--sans);font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:transparent;color:var(--dusk);border:.5px solid var(--stone);border-radius:10px;cursor:pointer}
+.btng:hover{color:var(--charcoal);border-color:var(--charcoal)}
+.loading{display:flex;flex-direction:column;align-items:center;padding:56px 24px;gap:16px;text-align:center}
+.ring{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--linen);border-top-color:var(--rose);animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ltxt{font-family:var(--serif);font-size:17px;font-style:italic;color:var(--dusk)}
+.rwrap{padding:0 24px 32px;animation:fadeup .5s ease}
+@keyframes fadeup{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.rbadge{display:inline-block;font-size:9px;letter-spacing:.18em;text-transform:uppercase;padding:4px 14px;border-radius:40px;background:var(--linen);color:var(--dusk);margin-bottom:8px}
+.rtitle{font-family:var(--serif);font-size:30px;font-weight:300;color:var(--ink);margin-bottom:4px;line-height:1.1}
+.rtitle em{font-style:italic}
+.rtagline{font-size:12px;color:var(--dusk);margin-bottom:16px;line-height:1.65}
+.rcard{background:#fff;border:.5px solid var(--linen);border-radius:14px;padding:16px;margin-bottom:10px}
+.rlbl{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--dusk);margin-bottom:8px}
+.nbar{border-left:2px solid var(--blush);padding-left:14px;margin-bottom:14px}
+.nlbl{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);margin-bottom:4px}
+.nbody{font-family:var(--serif);font-size:15px;font-style:italic;color:var(--charcoal);line-height:1.75;font-weight:300}
+.nbody.plain{font-style:normal;font-size:13px}
+.sil-result{display:flex;gap:14px;align-items:flex-start;margin-bottom:14px;padding-bottom:14px;border-bottom:.5px solid var(--linen)}
+.sil-result:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.sil-result svg{width:48px;flex-shrink:0}
+.sil-result-name{font-family:var(--serif);font-size:16px;color:var(--ink);margin-bottom:3px}
+.sil-result-desc{font-size:11px;color:var(--dusk);line-height:1.6}
+.sil-match{display:inline-block;font-size:9px;padding:2px 10px;border-radius:40px;margin-top:5px;letter-spacing:.06em}
+.sil-best{background:#F0F5F0;color:#4A7040}
+.sil-also{background:var(--linen);color:var(--dusk)}
+.dpill{display:inline-block;font-size:10px;padding:4px 12px;border-radius:40px;background:var(--linen);color:var(--dusk);margin:0 4px 4px 0}
+.anthro-section{background:#FDF5F2;border:.5px solid var(--blush);border-radius:14px;padding:16px;margin-bottom:10px}
+.anthro-title{font-family:var(--serif);font-size:16px;color:var(--ink);margin-bottom:4px}
+.anthro-sub{font-size:11px;color:var(--dusk);margin-bottom:12px;line-height:1.6}
+.alinks{display:flex;flex-direction:column;gap:7px}
+.alink{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;background:#fff;border:.5px solid var(--linen);border-radius:10px;text-decoration:none;transition:all .2s}
+.alink:hover{border-color:var(--stone)}
+.alink-txt{font-size:12px;color:var(--charcoal)}
+.alink-arr{font-size:12px;color:var(--stone)}
+.divider{border:none;border-top:.5px solid var(--linen);margin:14px 0}
+.restart{display:block;width:100%;margin-top:12px;padding:12px;font-family:var(--sans);font-size:10px;letter-spacing:.14em;text-transform:uppercase;background:transparent;color:var(--stone);border:.5px solid var(--linen);border-radius:10px;cursor:pointer}
+.restart:hover{color:var(--charcoal);border-color:var(--stone)}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="topbar">
+  <a class="back" href="index.html">← Back</a>
+  <span class="toplabel">Bridal Suite</span>
+</div>
+
+<!-- S1 -->
+<div id="s1">
+  <div class="hero">
+    <div class="eyebrow">Step 1 of 4</div>
+    <h1 class="htitle">Your wedding<br><em>vibe</em></h1>
+    <p class="hsub">Start with the feeling. Your vibe shapes everything — silhouette, fabric, every detail.</p>
+  </div>
+  <div class="deco"><hr><span></span><hr></div>
+  <div class="card">
+    <div class="ql">Wedding vibe</div>
+    <div class="qt">How do you want to feel on your wedding day?</div>
+    <div class="chips" id="vibe-c">
+      <div class="chip" data-v="garden romantic" onclick="mc(this,'vibe')">Garden romantic</div>
+      <div class="chip" data-v="ethereal" onclick="mc(this,'vibe')">Ethereal</div>
+      <div class="chip" data-v="bohemian" onclick="mc(this,'vibe')">Bohemian</div>
+      <div class="chip" data-v="coastal beach" onclick="mc(this,'vibe')">Coastal / beach</div>
+      <div class="chip" data-v="city hall chic" onclick="mc(this,'vibe')">City hall chic</div>
+      <div class="chip" data-v="vintage glamour" onclick="mc(this,'vibe')">Vintage glamour</div>
+      <div class="chip" data-v="modern minimalist" onclick="mc(this,'vibe')">Modern minimalist</div>
+      <div class="chip" data-v="maximalist dramatic" onclick="mc(this,'vibe')">Maximalist / dramatic</div>
+      <div class="chip" data-v="rustic" onclick="mc(this,'vibe')">Rustic</div>
+      <div class="chip" data-v="classic traditional" onclick="mc(this,'vibe')">Classic / traditional</div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:10px">
+    <div class="ql">Venue</div>
+    <div class="qt">Where are you getting married?</div>
+    <div class="slist" id="venue-l">
+      <div class="sopt" data-v="outdoor garden or vineyard" onclick="ss(this,'venue')">Outdoor garden or vineyard</div>
+      <div class="sopt" data-v="beach or coastal" onclick="ss(this,'venue')">Beach or coastal</div>
+      <div class="sopt" data-v="cathedral or church" onclick="ss(this,'venue')">Cathedral or church</div>
+      <div class="sopt" data-v="hotel ballroom or formal venue" onclick="ss(this,'venue')">Hotel ballroom or formal venue</div>
+      <div class="sopt" data-v="intimate restaurant or city hall" onclick="ss(this,'venue')">Intimate restaurant or city hall</div>
+      <div class="sopt" data-v="barn or rustic venue" onclick="ss(this,'venue')">Barn or rustic venue</div>
+      <div class="sopt" data-v="destination or elopement" onclick="ss(this,'venue')">Destination or elopement</div>
+    </div>
+  </div>
+  <div class="cta"><button class="btnp" id="n1" onclick="go('s2')" disabled>Next</button></div>
+</div>
+
+<!-- S2 -->
+<div id="s2" style="display:none">
+  <div class="hero">
+    <div class="eyebrow">Step 2 of 4</div>
+    <h1 class="htitle">Body <em>&</em><br>fit</h1>
+    <p class="hsub">Every body is beautiful. These questions help us find silhouettes that make you feel like the most confident version of yourself.</p>
+  </div>
+  <div class="deco"><hr><span></span><hr></div>
+  <div class="card">
+    <div class="ql">Body shape</div>
+    <div class="qt">Which describes your natural shape?</div>
+    <div class="qhint">Think about the relationship between shoulders, waist, and hips — not your size.</div>
+    <div class="slist" id="body-l">
+      <div class="sopt" data-v="hourglass" onclick="ss(this,'body')">Hourglass — balanced shoulders and hips, defined waist</div>
+      <div class="sopt" data-v="pear" onclick="ss(this,'body')">Pear — hips wider than shoulders</div>
+      <div class="sopt" data-v="apple" onclick="ss(this,'body')">Apple — fuller midsection, similar shoulders and hips</div>
+      <div class="sopt" data-v="rectangle" onclick="ss(this,'body')">Rectangle — shoulders, waist, and hips similar width</div>
+      <div class="sopt" data-v="inverted triangle" onclick="ss(this,'body')">Inverted triangle — broader shoulders, narrower hips</div>
+      <div class="sopt" data-v="petite" onclick="ss(this,'body')">Petite — shorter frame, under 5'4"</div>
+      <div class="sopt" data-v="tall" onclick="ss(this,'body')">Tall — 5'8" and above</div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:10px">
+    <div class="ql">What you want to highlight</div>
+    <div class="qt">What do you love most about your body?</div>
+    <div class="chips" id="highlight-c">
+      <div class="chip" data-v="waist" onclick="mc(this,'highlight')">My waist</div>
+      <div class="chip" data-v="décolletage" onclick="mc(this,'highlight')">My décolletage</div>
+      <div class="chip" data-v="shoulders" onclick="mc(this,'highlight')">My shoulders</div>
+      <div class="chip" data-v="curves" onclick="mc(this,'highlight')">My curves</div>
+      <div class="chip" data-v="back" onclick="mc(this,'highlight')">My back</div>
+      <div class="chip" data-v="legs" onclick="mc(this,'highlight')">My legs</div>
+    </div>
+  </div>
+  <div class="cta"><button class="btng" onclick="go('s1')">Back</button><button class="btnp" id="n2" onclick="go('s3')" disabled>Next</button></div>
+</div>
+
+<!-- S3 -->
+<div id="s3" style="display:none">
+  <div class="hero">
+    <div class="eyebrow">Step 3 of 4</div>
+    <h1 class="htitle">Details <em>&</em><br>fabric</h1>
+    <p class="hsub">The details are where your personality lives. Pick everything that calls to you.</p>
+  </div>
+  <div class="deco"><hr><span></span><hr></div>
+  <div class="card">
+    <div class="ql">Fabric & detail</div>
+    <div class="qt">What fabrics and details make your heart skip?</div>
+    <div class="chips" id="fabric-c">
+      <div class="chip" data-v="delicate lace" onclick="mc(this,'fabric')">Delicate lace</div>
+      <div class="chip" data-v="flowing chiffon" onclick="mc(this,'fabric')">Flowing chiffon</div>
+      <div class="chip" data-v="smooth satin" onclick="mc(this,'fabric')">Smooth satin</div>
+      <div class="chip" data-v="structured mikado" onclick="mc(this,'fabric')">Structured mikado</div>
+      <div class="chip" data-v="airy tulle" onclick="mc(this,'fabric')">Airy tulle</div>
+      <div class="chip" data-v="floral appliqué" onclick="mc(this,'fabric')">Floral appliqué</div>
+      <div class="chip" data-v="beading and sequins" onclick="mc(this,'fabric')">Beading & sequins</div>
+      <div class="chip" data-v="sleek crepe" onclick="mc(this,'fabric')">Sleek crepe</div>
+      <div class="chip" data-v="corset bodice" onclick="mc(this,'fabric')">Corset bodice</div>
+      <div class="chip" data-v="open back" onclick="mc(this,'fabric')">Open back</div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:10px">
+    <div class="ql">Neckline</div>
+    <div class="qt">What neckline feels most like you?</div>
+    <div class="chips" id="neck-c">
+      <div class="chip" data-v="sweetheart" onclick="mc(this,'neck')">Sweetheart</div>
+      <div class="chip" data-v="V-neck" onclick="mc(this,'neck')">V-neck</div>
+      <div class="chip" data-v="off-the-shoulder" onclick="mc(this,'neck')">Off-the-shoulder</div>
+      <div class="chip" data-v="strapless" onclick="mc(this,'neck')">Strapless</div>
+      <div class="chip" data-v="illusion sheer" onclick="mc(this,'neck')">Illusion / sheer</div>
+      <div class="chip" data-v="halter" onclick="mc(this,'neck')">Halter</div>
+      <div class="chip" data-v="square neck" onclick="mc(this,'neck')">Square neck</div>
+      <div class="chip" data-v="high neck" onclick="mc(this,'neck')">High neck</div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:10px">
+    <div class="ql">Train & length</div>
+    <div class="qt">How much drama do you want behind you?</div>
+    <div class="slist" id="train-l">
+      <div class="sopt" data-v="cathedral train" onclick="ss(this,'train')">Cathedral train — maximum drama</div>
+      <div class="sopt" data-v="chapel train" onclick="ss(this,'train')">Chapel train — elegant and classic</div>
+      <div class="sopt" data-v="sweep train" onclick="ss(this,'train')">Sweep train — subtle and manageable</div>
+      <div class="sopt" data-v="floor length no train" onclick="ss(this,'train')">Floor length, no train</div>
+      <div class="sopt" data-v="tea length" onclick="ss(this,'train')">Tea length — vintage and playful</div>
+      <div class="sopt" data-v="mini or short" onclick="ss(this,'train')">Mini or short — modern and fun</div>
+    </div>
+  </div>
+  <div class="cta"><button class="btng" onclick="go('s2')">Back</button><button class="btnp" id="n3" onclick="go('s4')" disabled>Next</button></div>
+</div>
+
+<!-- S4 -->
+<div id="s4" style="display:none">
+  <div class="hero">
+    <div class="eyebrow">Step 4 of 4</div>
+    <h1 class="htitle">Your<br><em>silhouette</em></h1>
+    <p class="hsub">Select any silhouettes you're drawn to — or skip to let your other answers guide the recommendation.</p>
+  </div>
+  <div class="deco"><hr><span></span><hr></div>
+  <div class="card">
+    <div class="ql">Silhouettes you love</div>
+    <div class="qt">Which shapes speak to you? Select all that apply.</div>
+    <div class="sil-grid">
+      <div class="sil-card" data-v="A-line" onclick="tSil(this)">
+        <svg viewBox="0 0 40 64" fill="none"><ellipse cx="20" cy="8" rx="5" ry="6" fill="#C9C2B6"/><path d="M15 14 Q10 26 8 40 Q6 52 11 62 L29 62 Q34 52 32 40 Q30 26 25 14Z" fill="#C9C2B6"/></svg>
+        <div class="sil-name">A-line</div>
+      </div>
+      <div class="sil-card" data-v="Ball gown" onclick="tSil(this)">
+        <svg viewBox="0 0 40 64" fill="none"><ellipse cx="20" cy="8" rx="5" ry="6" fill="#C9C2B6"/><path d="M15 14 Q12 24 11 34 Q7 50 4 62 L36 62 Q33 50 29 34 Q28 24 25 14Z" fill="#C9C2B6"/></svg>
+        <div class="sil-name">Ball gown</div>
+      </div>
+      <div class="sil-card" data-v="Mermaid" onclick="tSil(this)">
+        <svg viewBox="0 0 40 64" fill="none"><ellipse cx="20" cy="8" rx="5" ry="6" fill="#C9C2B6"/><path d="M15 14 Q13 22 14 32 Q15 42 11 52 Q15 60 20 62 Q25 60 29 52 Q25 42 26 32 Q27 22 25 14Z" fill="#C9C2B6"/></svg>
+        <div class="sil-name">Mermaid</div>
+      </div>
+      <div class="sil-card" data-v="Fit and flare" onclick="tSil(this)">
+        <svg viewBox="0 0 40 64" fill="none"><ellipse cx="20" cy="8" rx="5" ry="6" fill="#C9C2B6"/><path d="M15 14 Q13 22 14 34 Q20 40 26 34 Q27 22 25 14Z" fill="#C9C2B6"/><path d="M14 36 Q8 48 8 62 L32 62 Q32 48 26 36Z" fill="#C9C2B6"/></svg>
+        <div class="sil-name">Fit & flare</div>
+      </div>
+      <div class="sil-card" data-v="Column" onclick="tSil(this)">
+        <svg viewBox="0 0 40 64" fill="none"><ellipse cx="20" cy="8" rx="5" ry="6" fill="#C9C2B6"/><path d="M15 14 Q14 22 14 36 L14 62 L26 62 L26 36 Q26 22 25 14Z" fill="#C9C2B6"/></svg>
+        <div class="sil-name">Column</div>
+      </div>
+      <div class="sil-card" data-v="Drop waist" onclick="tSil(this)">
+        <svg viewBox="0 0 40 64" fill="none"><ellipse cx="20" cy="8" rx="5" ry="6" fill="#C9C2B6"/><path d="M15 14 Q13 22 14 36 Q20 42 26 36 Q27 22 25 14Z" fill="#C9C2B6"/><path d="M14 38 Q7 50 7 62 L33 62 Q33 50 26 38Z" fill="#C9C2B6"/></svg>
+        <div class="sil-name">Drop waist</div>
+      </div>
+      <div class="sil-card" data-v="Tea length" onclick="tSil(this)">
+        <svg viewBox="0 0 40 64" fill="none"><ellipse cx="20" cy="8" rx="5" ry="6" fill="#C9C2B6"/><path d="M15 14 Q12 24 11 34 Q9 46 13 54 L27 54 Q31 46 29 34 Q28 24 25 14Z" fill="#C9C2B6"/></svg>
+        <div class="sil-name">Tea length</div>
+      </div>
+      <div class="sil-card" data-v="Mini" onclick="tSil(this)">
+        <svg viewBox="0 0 40 64" fill="none"><ellipse cx="20" cy="8" rx="5" ry="6" fill="#C9C2B6"/><path d="M15 14 Q13 22 13 32 Q20 36 27 32 Q27 22 25 14Z" fill="#C9C2B6"/><path d="M13 34 L11 48 L29 48 L27 34Z" fill="#C9C2B6"/></svg>
+        <div class="sil-name">Mini</div>
+      </div>
+    </div>
+  </div>
+  <div class="cta"><button class="btng" onclick="go('s3')">Back</button><button class="btnp" onclick="analyze()">Find my gown</button></div>
+</div>
+
+<!-- LOADING -->
+<div id="loading" style="display:none">
+  <div class="loading"><div class="ring"></div><p class="ltxt" id="lmsg">Your stylist is reviewing your choices...</p></div>
+</div>
+
+<!-- RESULT -->
+<div id="result" style="display:none">
+  <div class="rwrap" id="result-inner" style="margin-top:20px"></div>
+</div>
+
+</div>
+<script>
+const API_KEY='YOUR_API_KEY_HERE';
+const S={vibe:[],venue:null,body:null,highlight:[],fabric:[],neck:[],train:null,sil:[]};
+
+const SIL_DB={
+  'A-line':{desc:'Fitted bodice that gently flares from the waist. Universally flattering, romantic, and dance-floor ready.',bestFor:'Most body types · especially pear and apple shapes · petite brides wanting length',tip:'The most universally kind silhouette. It highlights the waist and skims over hips gracefully — truly no wrong answer here.'},
+  'Ball gown':{desc:'Fitted bodice with a full, dramatic skirt. The classic fairy-tale entrance with maximum volume and grandeur.',bestFor:'Hourglass and pear shapes · formal venues · anyone wanting a true princess moment',tip:'Don\'t fear the volume! Even athletic and rectangular frames love a ballgown for its incredible waist-defining magic.'},
+  'Mermaid':{desc:'Hugs the body from chest to knee then dramatically flares. For the bride who wants to make an unforgettable statement.',bestFor:'Confident hourglass and slim figures · brides who want to celebrate their curves',tip:'Built-in shapewear works beautifully under a mermaid for a seamless finish. The drama is worth every step.'},
+  'Fit and flare':{desc:'The perfect middle ground — fitted through the bodice and hips, then flares below. Structure meets comfort.',bestFor:'Brides who want to show curves without restriction · great for dancing all night',tip:'Perfect if you love mermaid drama but want to actually move. You can have both.'},
+  'Column':{desc:'Slim, sleek, and modern. Skims the natural body line without dramatic flare — the minimalist bride\'s dream gown.',bestFor:'Tall and lean brides · petite brides wanting to elongate · minimalist and destination weddings',tip:'A bias-cut column in silk or crepe flows magnificently down the aisle. Add a dramatic veil and let the simplicity speak.'},
+  'Drop waist':{desc:'A trending silhouette — fitted through the waist with the flare dropping below the hip for a fresh, elongating effect.',bestFor:'Most body types · brides wanting a modern fresh take · very on-trend for 2025',tip:'Anthropologie Weddings\' Fall 2025 collection is full of drop-waist styles. It\'s the silhouette of this moment.'},
+  'Tea length':{desc:'Ending mid-calf with a charming vintage nod — playful, modern, and perfect for showing off gorgeous shoes.',bestFor:'Petite brides · fashion-forward brides · elopements and intimate ceremonies',tip:'Show off your shoes! Tea-length is your excuse for the most beautiful heels you own.'},
+  'Mini':{desc:'Short, bold, and fearless — for the rule-breaking bride who wants to dance all night long.',bestFor:'Fashion-forward brides · intimate ceremonies · second look at reception',tip:'A mini as a reception second look paired with a dramatic gown for the ceremony? The ultimate bridal power move.'}
+};
+
+const BODY_SIL={
+  hourglass:['Mermaid','Fit and flare','A-line','Ball gown'],
+  pear:['A-line','Ball gown','Fit and flare','Drop waist'],
+  apple:['A-line','Drop waist','Column','Fit and flare'],
+  rectangle:['Mermaid','Fit and flare','Ball gown','A-line'],
+  'inverted triangle':['A-line','Ball gown','Drop waist','Column'],
+  petite:['A-line','Column','Tea length','Fit and flare'],
+  tall:['Mermaid','Ball gown','A-line','Column']
+};
+
+const VIBE_STYLE={
+  'garden romantic':'Reach for floral appliqué, delicate lace, soft chiffon, and flowing A-line or ball gown silhouettes. Think cathedral veils trailing through rose gardens and delicate floral hair accessories.',
+  'ethereal':'Flowing chiffon, illusion necklines, and soft A-line or column silhouettes. Fabrics that move with you like a second skin are everything for this vibe.',
+  'bohemian':'Flutter sleeves, lace overlays, and relaxed A-line silhouettes. Barefoot sandals, a flower crown, and a relaxed attitude complete the look.',
+  'coastal beach':'Lightweight chiffon or crepe, simple column or A-line silhouettes, and halter or off-the-shoulder necklines. Easy to move in and breathtaking by the water.',
+  'city hall chic':'Sleek column or tea-length in crepe or satin. Clean lines, zero unnecessary embellishment, and the most incredible shoes you own.',
+  'vintage glamour':'1950s tea-length or dramatic ball gown with sweetheart neckline. Lace, beading, pearl accessories, and finger waves in the hair.',
+  'modern minimalist':'Column or sleek A-line in crepe, satin, or mikado. No embellishment — let the cut and your presence do all the talking.',
+  'maximalist dramatic':'Ball gown or mermaid with the most dramatic train you can find. Layers of tulle, beading, a cathedral veil, and every piece of jewelry you own.',
+  'rustic':'Lace A-line or fit & flare with warm fabric tones. Cowboy boots under a tea-length are always a magnificent yes.',
+  'classic traditional':'A-line or ball gown in ivory or white satin. Sweetheart neckline, pearl jewelry, and a cathedral-length veil. Timeless for a reason.'
+};
+
+function mc(el,k){el.classList.toggle('sel');const v=el.dataset.v;const i=S[k].indexOf(v);i>-1?S[k].splice(i,1):S[k].push(v);vld()}
+function ss(el,k){el.closest('.slist').querySelectorAll('.sopt').forEach(o=>o.classList.remove('sel'));el.classList.add('sel');S[k]=el.dataset.v;vld()}
+function tSil(el){el.classList.toggle('sel');const v=el.dataset.v;const i=S.sil.indexOf(v);i>-1?S.sil.splice(i,1):S.sil.push(v)}
+
+function vld(){
+  const ok1=S.vibe.length>0&&S.venue;
+  const ok2=S.body&&S.highlight.length>0;
+  const ok3=S.fabric.length>0&&S.train;
+  const n1=document.getElementById('n1');const n2=document.getElementById('n2');const n3=document.getElementById('n3');
+  if(n1)n1.disabled=!ok1;if(n2)n2.disabled=!ok2;if(n3)n3.disabled=!ok3;
+}
+
+function go(id){
+  ['s1','s2','s3','s4','loading','result'].forEach(x=>{const el=document.getElementById(x);if(el)el.style.display=x===id?'':'none'});
+  window.scrollTo(0,0);
+}
+
+const MSGS=['Your stylist is reviewing your choices...','Finding your perfect silhouettes...','Writing your style note...','Almost there...'];
+function cycleMsgs(el,msgs){let i=0;el.textContent=msgs[0];return setInterval(()=>{i=(i+1)%msgs.length;el.textContent=msgs[i];},2000)}
+
+function silSVG(name,color){
+  const c=color||'#C9C2B6';
+  const m={'A-line':`<svg viewBox="0 0 48 80" fill="none"><ellipse cx="24" cy="9" rx="6" ry="7" fill="${c}"/><path d="M18 16 Q12 28 10 44 Q8 60 13 76 L35 76 Q40 60 38 44 Q36 28 30 16Z" fill="${c}"/></svg>`,'Ball gown':`<svg viewBox="0 0 48 80" fill="none"><ellipse cx="24" cy="9" rx="6" ry="7" fill="${c}"/><path d="M18 16 Q14 28 13 40 Q8 58 5 76 L43 76 Q40 58 35 40 Q34 28 30 16Z" fill="${c}"/></svg>`,'Mermaid':`<svg viewBox="0 0 48 80" fill="none"><ellipse cx="24" cy="9" rx="6" ry="7" fill="${c}"/><path d="M18 16 Q15 26 16 38 Q17 50 13 62 Q17 72 24 76 Q31 72 35 62 Q31 50 32 38 Q33 26 30 16Z" fill="${c}"/></svg>`,'Fit and flare':`<svg viewBox="0 0 48 80" fill="none"><ellipse cx="24" cy="9" rx="6" ry="7" fill="${c}"/><path d="M18 16 Q15 26 16 40 Q24 48 32 40 Q33 26 30 16Z" fill="${c}"/><path d="M16 42 Q9 58 9 76 L39 76 Q39 58 32 42Z" fill="${c}"/></svg>`,'Column':`<svg viewBox="0 0 48 80" fill="none"><ellipse cx="24" cy="9" rx="6" ry="7" fill="${c}"/><path d="M18 16 Q17 26 17 42 L17 76 L31 76 L31 42 Q31 26 30 16Z" fill="${c}"/></svg>`,'Drop waist':`<svg viewBox="0 0 48 80" fill="none"><ellipse cx="24" cy="9" rx="6" ry="7" fill="${c}"/><path d="M18 16 Q15 26 16 42 Q24 50 32 42 Q33 26 30 16Z" fill="${c}"/><path d="M16 44 Q8 58 8 76 L40 76 Q40 58 32 44Z" fill="${c}"/></svg>`,'Tea length':`<svg viewBox="0 0 48 80" fill="none"><ellipse cx="24" cy="9" rx="6" ry="7" fill="${c}"/><path d="M18 16 Q14 28 13 40 Q11 54 15 64 L33 64 Q37 54 35 40 Q34 28 30 16Z" fill="${c}"/></svg>`,'Mini':`<svg viewBox="0 0 48 80" fill="none"><ellipse cx="24" cy="9" rx="6" ry="7" fill="${c}"/><path d="M18 16 Q15 26 15 38 Q24 44 33 38 Q33 26 30 16Z" fill="${c}"/><path d="M15 40 L13 56 L35 56 L33 40Z" fill="${c}"/></svg>`};
+  return m[name]||m['A-line'];
+}
+
+async function analyze(){
+  go('loading');
+  const el=document.getElementById('lmsg');
+  const timer=cycleMsgs(el,MSGS);
+
+  const bodySils=BODY_SIL[S.body]||['A-line','Column','Fit and flare'];
+  let recommended=[...S.sil];
+  bodySils.forEach(s=>{if(!recommended.includes(s))recommended.push(s)});
+  recommended=[...new Set(recommended)].slice(0,3);
+  if(recommended.length===0)recommended=['A-line','Column'];
+
+  const vibeKey=S.vibe[0]||'garden romantic';
+  const vibeNote=VIBE_STYLE[vibeKey]||VIBE_STYLE['garden romantic'];
+
+  let stylistNote=`Your ${S.vibe.join(' and ')} vision for a ${S.venue} wedding is already breathtaking. The ${recommended[0]} silhouette was made for your body and your day — it will make you feel exactly the way you always imagined.`;
+  let whyNote=`Your ${S.body} frame is beautifully flattered by a ${recommended[0]}. Combined with your love of ${(S.fabric.slice(0,2).join(' and '))||'beautiful details'}, you have the foundation of a truly extraordinary gown.`;
+
+  if(API_KEY&&API_KEY!=='YOUR_API_KEY_HERE'){
+    try{
+      const prompt=`You are a warm, editorial senior bridal stylist. A bride has: vibe=${S.vibe.join(', ')}, venue=${S.venue}, body=${S.body}, wants to highlight=${S.highlight.join(', ')}, loves=${S.fabric.join(', ')}, neckline=${S.neck.join(', ')}, train=${S.train}. Top recommendation=${recommended[0]}. Write JSON: "stylistNote" (2 warm personal sentences about her bridal vision) and "whyNote" (2 sentences why ${recommended[0]} is perfect for her specifically). No preamble or markdown.`;
+      const resp=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':API_KEY,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:400,messages:[{role:'user',content:prompt}]})});
+      const data=await resp.json();
+      const txt=data.content.map(b=>b.text||'').join('').replace(/```json|```/g,'').trim();
+      const ai=JSON.parse(txt);
+      if(ai.stylistNote)stylistNote=ai.stylistNote;
+      if(ai.whyNote)whyNote=ai.whyNote;
+    }catch(e){}
+  }
+
+  clearInterval(timer);
+  render(recommended,stylistNote,whyNote,vibeNote);
+}
+
+function render(recs,stylistNote,whyNote,vibeNote){
+  const silCards=recs.map((name,i)=>{
+    const d=SIL_DB[name]||SIL_DB['A-line'];
+    const color=i===0?'#C9A0A0':'#C9C2B6';
+    const badge=i===0?'<span class="sil-match sil-best">Best match</span>':'<span class="sil-match sil-also">Also consider</span>';
+    return `<div class="sil-result">${silSVG(name,color)}<div style="flex:1"><div class="sil-result-name">${name}</div><div class="sil-result-desc">${d.desc}</div><div class="sil-result-desc" style="margin-top:4px;color:var(--stone)">Best for: ${d.bestFor}</div>${badge}</div></div>`;
+  }).join('');
+
+  const pills=[...S.fabric,...S.neck].filter(Boolean).map(d=>`<span class="dpill">${d}</span>`).join('');
+
+  document.getElementById('result-inner').innerHTML=`
+    <div class="rbadge">Your bridal style</div>
+    <h2 class="rtitle"><em>${(S.vibe[0]||'Romantic').charAt(0).toUpperCase()+(S.vibe[0]||'Romantic').slice(1)} bride</em></h2>
+    <p class="rtagline">${S.venue||''} · ${S.train||''}</p>
+    <div class="nbar"><div class="nlbl">Your stylist's note</div><div class="nbody">${stylistNote}</div></div>
+    <div class="nbar"><div class="nlbl">Why this works for you</div><div class="nbody">${whyNote}</div></div>
+    <div class="divider"></div>
+    <div class="rcard"><div class="rlbl">Your recommended silhouettes</div>${silCards}</div>
+    ${pills?`<div class="rcard"><div class="rlbl">Your detail wishlist</div><div style="margin-bottom:10px">${pills}</div><div class="nbody plain" style="color:var(--dusk)">${(SIL_DB[recs[0]]||SIL_DB['A-line']).tip}</div></div>`:''}
+    <div class="rcard"><div class="rlbl">Your vibe guide</div><div class="nbody plain" style="color:var(--charcoal)">${vibeNote}</div></div>
+    <div class="divider"></div>
+    <div class="anthro-section">
+      <div class="anthro-title">Shop Anthropologie Weddings</div>
+      <div class="anthro-sub">Anthropologie carries A-line, ball gown, mermaid, fit-and-flare, column, and drop-waist styles from Jenny Yoo, RISH, Watters, Pronovias, and more.</div>
+      <div class="alinks">
+        <a class="alink" href="https://www.anthropologie.com/bhldn-wedding-dresses" target="_blank"><span class="alink-txt">Browse all Anthropologie Weddings gowns</span><span class="alink-arr">→</span></a>
+        <a class="alink" href="https://www.anthropologie.com/bhldn-romantic-bride" target="_blank"><span class="alink-txt">Shop romantic & ethereal gowns</span><span class="alink-arr">→</span></a>
+        <a class="alink" href="https://www.anthropologie.com/bhldn-plus-wedding-dresses" target="_blank"><span class="alink-txt">Shop extended sizing</span><span class="alink-arr">→</span></a>
+        <a class="alink" href="https://www.anthropologie.com/bhldn-weddings" target="_blank"><span class="alink-txt">Book a bridal styling appointment</span><span class="alink-arr">→</span></a>
+      </div>
+    </div>
+    <button class="restart" onclick="restart()">Start over</button>`;
+  go('result');
+}
+
+function restart(){
+  Object.keys(S).forEach(k=>S[k]=Array.isArray(S[k])?[]:null);
+  document.querySelectorAll('.chip,.sopt,.sil-card').forEach(el=>el.classList.remove('sel'));
+  go('s1');vld();
+}
+</script>
+</body>
+</html>
