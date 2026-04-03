@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Color Season · The Styling Suite</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cream:#F8F4EF;--linen:#EDE8E0;--stone:#C9C2B6;--dusk:#8C8379;
+  --charcoal:#2E2A26;--ink:#1A1714;--blush:#E8C4BB;--rose:#C97B7B;
+  --serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost',sans-serif;
+}
+html,body{background:var(--cream);color:var(--ink);font-family:var(--sans);font-weight:300;-webkit-font-smoothing:antialiased}
+.page{max-width:480px;margin:0 auto;min-height:100vh;padding-bottom:56px}
+
+.topbar{padding:24px 24px 0;display:flex;justify-content:space-between;align-items:center}
+.back{font-size:11px;letter-spacing:.08em;color:var(--dusk);text-decoration:none}
+.back:hover{color:var(--charcoal)}
+.toplabel{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--stone)}
+
+.hero{padding:28px 24px 16px}
+.eyebrow{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--dusk);margin-bottom:8px}
+.htitle{font-family:var(--serif);font-size:34px;font-weight:300;line-height:1.1;margin-bottom:10px}
+.htitle em{font-style:italic}
+.hsub{font-size:12px;color:var(--dusk);line-height:1.7}
+
+.deco{margin:14px 24px;display:flex;align-items:center;gap:10px}
+.deco hr{flex:1;border:none;border-top:.5px solid var(--stone)}
+.deco span{width:4px;height:4px;background:var(--stone);transform:rotate(45deg);flex-shrink:0}
+
+.prog{padding:16px 24px 0;display:flex;align-items:center;gap:5px}
+.pd{width:5px;height:5px;border-radius:50%;background:var(--stone);transition:all .3s;flex-shrink:0}
+.pd.a{background:var(--charcoal);width:18px;border-radius:3px}
+.pd.d{background:#C4A45A}
+.plbl{margin-left:auto;font-size:10px;color:var(--dusk);letter-spacing:.06em}
+
+.card{background:#fff;border:.5px solid var(--linen);border-radius:14px;padding:18px;margin:10px 24px 0}
+.ql{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--dusk);margin-bottom:5px}
+.qt{font-family:var(--serif);font-size:18px;font-weight:300;color:var(--ink);margin-bottom:12px;line-height:1.3}
+.qhint{font-size:11px;color:var(--stone);margin-bottom:12px;line-height:1.6;font-style:italic}
+
+/* tone */
+.tgrid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px}
+.ts{height:34px;border-radius:7px;cursor:pointer;border:2px solid transparent;transition:all .15s}
+.ts:hover{transform:scale(1.06)}
+.ts.sel{border-color:var(--charcoal);transform:scale(1.09)}
+.tlbl{font-size:9px;color:var(--dusk);text-align:center;margin-top:3px}
+
+/* under */
+.urow{display:flex;gap:7px}
+.uopt{flex:1;border:.5px solid var(--linen);border-radius:10px;padding:10px 5px;text-align:center;cursor:pointer;transition:all .2s;background:var(--cream)}
+.uopt:hover{border-color:var(--stone)}
+.uopt.sel{border-color:var(--blush);background:#FDF5F2}
+.udot{width:18px;height:18px;border-radius:50%;margin:0 auto 5px}
+.uname{font-size:9px;color:var(--dusk);line-height:1.3}
+.uopt.sel .uname{color:var(--rose)}
+
+/* metal */
+.mrow{display:flex;gap:8px}
+.mopt{flex:1;border:.5px solid var(--linen);border-radius:10px;padding:12px 6px;text-align:center;cursor:pointer;transition:all .2s;background:var(--cream)}
+.mopt:hover{border-color:var(--stone)}
+.mopt.sel{border-color:#C4A45A;background:#FBF6EC}
+.mico{font-size:16px;margin-bottom:5px}
+.mnm{font-family:var(--serif);font-size:14px;color:var(--ink);margin-bottom:2px}
+.mds{font-size:10px;color:var(--dusk);line-height:1.3}
+
+/* chips */
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:11px;padding:6px 13px;border-radius:40px;border:.5px solid var(--stone);color:var(--dusk);cursor:pointer;transition:all .18s;user-select:none}
+.chip:hover{border-color:var(--charcoal);color:var(--charcoal)}
+.chip.sel{background:var(--charcoal);color:#fff;border-color:var(--charcoal)}
+
+/* single select list */
+.slist{display:flex;flex-direction:column;gap:7px}
+.sopt{border:.5px solid var(--linen);border-radius:10px;padding:11px 14px;cursor:pointer;font-size:12px;color:var(--charcoal);background:var(--cream);transition:all .18s;line-height:1.5}
+.sopt:hover{border-color:var(--stone)}
+.sopt.sel{border-color:var(--blush);background:#FDF5F2;color:var(--rose)}
+
+/* cta */
+.cta{padding:14px 24px;display:flex;gap:10px}
+.btnp{flex:1;padding:13px;font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase;background:var(--charcoal);color:#fff;border:none;border-radius:10px;cursor:pointer;transition:all .2s}
+.btnp:hover{background:var(--ink)}
+.btnp:disabled{background:var(--stone);cursor:default}
+.btng{padding:13px 16px;font-family:var(--sans);font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:transparent;color:var(--dusk);border:.5px solid var(--stone);border-radius:10px;cursor:pointer;transition:all .2s}
+.btng:hover{color:var(--charcoal);border-color:var(--charcoal)}
+
+/* loading */
+.loading{display:flex;flex-direction:column;align-items:center;padding:56px 24px;gap:16px;text-align:center}
+.ring{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--linen);border-top-color:var(--rose);animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ltxt{font-family:var(--serif);font-size:17px;font-style:italic;color:var(--dusk)}
+
+/* result */
+.rwrap{padding:0 24px 32px;animation:fadeup .5s ease}
+@keyframes fadeup{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+.sbadge{display:inline-block;font-size:9px;letter-spacing:.18em;text-transform:uppercase;padding:4px 14px;border-radius:40px;background:var(--linen);color:var(--dusk);margin-bottom:8px}
+.stitle{font-family:var(--serif);font-size:30px;font-weight:300;color:var(--ink);margin-bottom:4px;line-height:1.1}
+.stitle em{font-style:italic}
+.stagline{font-size:12px;color:var(--dusk);margin-bottom:16px;line-height:1.65;letter-spacing:.02em}
+
+/* season visual */
+.season-visual{border-radius:14px;overflow:hidden;margin-bottom:14px}
+
+/* palette */
+.rlbl{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--dusk);margin-bottom:8px}
+.rcard{background:#fff;border:.5px solid var(--linen);border-radius:14px;padding:16px;margin-bottom:10px}
+.palrow{display:flex;gap:6px;margin-bottom:6px}
+.pswatch{flex:1;height:48px;border-radius:8px}
+.pname{font-size:9px;color:var(--stone);text-align:center;margin-top:3px;line-height:1.3}
+.avoidrow{display:flex;gap:6px;margin-bottom:8px}
+.aswatch{flex:1;height:32px;border-radius:7px;opacity:.38}
+
+/* note */
+.nbar{border-left:2px solid var(--blush);padding-left:14px;margin-bottom:14px}
+.nlbl{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);margin-bottom:4px}
+.nbody{font-family:var(--serif);font-size:15px;font-style:italic;color:var(--charcoal);line-height:1.75;font-weight:300}
+.nbody.plain{font-style:normal;font-size:13px}
+
+/* anthro links */
+.anthro-section{background:#FDF5F2;border:.5px solid var(--blush);border-radius:14px;padding:16px;margin-bottom:10px}
+.anthro-title{font-family:var(--serif);font-size:16px;color:var(--ink);margin-bottom:4px}
+.anthro-sub{font-size:11px;color:var(--dusk);margin-bottom:14px;line-height:1.6}
+.anthro-links{display:flex;flex-direction:column;gap:8px}
+.alink{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;background:#fff;border:.5px solid var(--linen);border-radius:10px;text-decoration:none;transition:all .2s}
+.alink:hover{border-color:var(--stone)}
+.alink-text{font-size:12px;color:var(--charcoal)}
+.alink-arrow{font-size:12px;color:var(--stone)}
+
+.divider{border:none;border-top:.5px solid var(--linen);margin:14px 0}
+.restart{display:block;width:100%;margin-top:12px;padding:12px;font-family:var(--sans);font-size:10px;letter-spacing:.14em;text-transform:uppercase;background:transparent;color:var(--stone);border:.5px solid var(--linen);border-radius:10px;cursor:pointer;transition:all .2s}
+.restart:hover{color:var(--charcoal);border-color:var(--stone)}
+.etxt{font-family:var(--serif);font-size:16px;color:var(--rose);font-style:italic;margin-bottom:14px;text-align:center;padding:32px 24px 0}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="topbar">
+  <a class="back" href="index.html">← Back</a>
+  <span class="toplabel">Color Season</span>
+</div>
+
+<!-- S1 -->
+<div id="s1">
+  <div class="hero">
+    <div class="eyebrow">Step 1 of 4</div>
+    <h1 class="htitle">Skin tone <em>&</em><br>undertone</h1>
+    <p class="hsub">Undertone is the underlying hue beneath your skin — separate from how light or dark it is. It's the key to your season.</p>
+  </div>
+  <div class="deco"><hr><span></span><hr></div>
+  <div class="card">
+    <div class="ql">Skin depth</div>
+    <div class="qt">Select your complexion</div>
+    <div class="tgrid" id="tone-g">
+      <div><div class="ts" style="background:#FDDBB4" data-v="fair" onclick="selT(this)"></div><div class="tlbl">Fair</div></div>
+      <div><div class="ts" style="background:#F2C68A" data-v="light" onclick="selT(this)"></div><div class="tlbl">Light</div></div>
+      <div><div class="ts" style="background:#D4956A" data-v="medium" onclick="selT(this)"></div><div class="tlbl">Medium</div></div>
+      <div><div class="ts" style="background:#B07040" data-v="tan" onclick="selT(this)"></div><div class="tlbl">Tan</div></div>
+      <div><div class="ts" style="background:#7A4828" data-v="deep" onclick="selT(this)"></div><div class="tlbl">Deep</div></div>
+      <div><div class="ts" style="background:#3D1F0E" data-v="rich" onclick="selT(this)"></div><div class="tlbl">Rich</div></div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:10px">
+    <div class="ql">Undertone</div>
+    <div class="qt">What is the underlying hue of your skin?</div>
+    <div class="qhint">Look at your inner wrist veins: blue/purple = cool · green = warm · blue-green = neutral</div>
+    <div class="urow">
+      <div class="uopt" data-v="warm" onclick="selU(this)"><div class="udot" style="background:#F5C07A"></div><div class="uname">Warm<br>Yellow/gold</div></div>
+      <div class="uopt" data-v="cool" onclick="selU(this)"><div class="udot" style="background:#A8B4D0"></div><div class="uname">Cool<br>Pink/blue</div></div>
+      <div class="uopt" data-v="neutral" onclick="selU(this)"><div class="udot" style="background:#C8BFA8"></div><div class="uname">Neutral<br>Balanced</div></div>
+      <div class="uopt" data-v="olive" onclick="selU(this)"><div class="udot" style="background:#9EA878"></div><div class="uname">Olive<br>Green</div></div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:10px">
+    <div class="ql">Metal test</div>
+    <div class="qt">Which looks better against your skin?</div>
+    <div class="qhint">Hold gold and silver jewelry near your face in natural light</div>
+    <div class="mrow">
+      <div class="mopt" data-v="gold" onclick="selM(this)"><div class="mico">◎</div><div class="mnm">Gold</div><div class="mds">Skin glows</div></div>
+      <div class="mopt" data-v="silver" onclick="selM(this)"><div class="mico">◯</div><div class="mnm">Silver</div><div class="mds">Skin clears</div></div>
+      <div class="mopt" data-v="both" onclick="selM(this)"><div class="mico" style="font-size:12px">Both</div><div class="mnm">Both</div><div class="mds">No difference</div></div>
+    </div>
+  </div>
+  <div class="cta"><button class="btnp" id="n1" onclick="go('s2')" disabled>Next</button></div>
+</div>
+
+<!-- S2 -->
+<div id="s2" style="display:none">
+  <div class="hero">
+    <div class="eyebrow">Step 2 of 4</div>
+    <h1 class="htitle">Hair <em>&</em><br>eye color</h1>
+    <p class="hsub">Use your natural color before any dye. Hair and eye undertones confirm your hue direction.</p>
+  </div>
+  <div class="deco"><hr><span></span><hr></div>
+  <div class="card">
+    <div class="ql">Natural hair</div>
+    <div class="qt">Select your natural hair color</div>
+    <div class="chips" id="hair-c">
+      <div class="chip" data-v="platinum-white" onclick="c1(this,'hair')">Platinum / white</div>
+      <div class="chip" data-v="golden-blonde" onclick="c1(this,'hair')">Golden blonde</div>
+      <div class="chip" data-v="ash-blonde" onclick="c1(this,'hair')">Ash blonde</div>
+      <div class="chip" data-v="strawberry-blonde" onclick="c1(this,'hair')">Strawberry blonde</div>
+      <div class="chip" data-v="light-brown" onclick="c1(this,'hair')">Light brown</div>
+      <div class="chip" data-v="warm-brown" onclick="c1(this,'hair')">Warm golden brown</div>
+      <div class="chip" data-v="ash-brown" onclick="c1(this,'hair')">Cool ash brown</div>
+      <div class="chip" data-v="auburn-copper" onclick="c1(this,'hair')">Auburn / copper</div>
+      <div class="chip" data-v="dark-red" onclick="c1(this,'hair')">Cool dark red</div>
+      <div class="chip" data-v="dark-brown" onclick="c1(this,'hair')">Dark brown</div>
+      <div class="chip" data-v="black" onclick="c1(this,'hair')">Black</div>
+      <div class="chip" data-v="silver-grey" onclick="c1(this,'hair')">Silver / grey</div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:10px">
+    <div class="ql">Eye color</div>
+    <div class="qt">What color are your eyes?</div>
+    <div class="chips" id="eye-c">
+      <div class="chip" data-v="bright-blue" onclick="c1(this,'eye')">Clear bright blue</div>
+      <div class="chip" data-v="grey-blue" onclick="c1(this,'eye')">Soft grey-blue</div>
+      <div class="chip" data-v="cool-grey" onclick="c1(this,'eye')">Cool grey</div>
+      <div class="chip" data-v="teal-turquoise" onclick="c1(this,'eye')">Warm teal / turquoise</div>
+      <div class="chip" data-v="bright-green" onclick="c1(this,'eye')">Bright green</div>
+      <div class="chip" data-v="grey-green" onclick="c1(this,'eye')">Soft grey-green</div>
+      <div class="chip" data-v="olive-green" onclick="c1(this,'eye')">Warm olive / mossy</div>
+      <div class="chip" data-v="warm-hazel" onclick="c1(this,'eye')">Warm hazel</div>
+      <div class="chip" data-v="cool-hazel" onclick="c1(this,'eye')">Cool hazel</div>
+      <div class="chip" data-v="light-brown" onclick="c1(this,'eye')">Light warm brown</div>
+      <div class="chip" data-v="medium-brown" onclick="c1(this,'eye')">Medium brown</div>
+      <div class="chip" data-v="dark-brown" onclick="c1(this,'eye')">Dark brown / black</div>
+    </div>
+  </div>
+  <div class="cta"><button class="btng" onclick="go('s1')">Back</button><button class="btnp" id="n2" onclick="go('s3')" disabled>Next</button></div>
+</div>
+
+<!-- S3 -->
+<div id="s3" style="display:none">
+  <div class="hero">
+    <div class="eyebrow">Step 3 of 4</div>
+    <h1 class="htitle">Value <em>&</em><br>contrast</h1>
+    <p class="hsub">How light or dark is your overall coloring? How much contrast exists between your features?</p>
+  </div>
+  <div class="deco"><hr><span></span><hr></div>
+  <div class="card">
+    <div class="ql">Sun reaction</div>
+    <div class="qt">What happens when you spend time in the sun?</div>
+    <div class="slist" id="sun-l">
+      <div class="sopt" data-v="burns-rarely-tans" onclick="ss(this,'sun')">Burn easily, rarely tan — very fair skin</div>
+      <div class="sopt" data-v="burns-then-tans" onclick="ss(this,'sun')">Burn first, then slowly tan</div>
+      <div class="sopt" data-v="tans-easily" onclick="ss(this,'sun')">Tan easily, rarely burn</div>
+      <div class="sopt" data-v="tans-very-quickly" onclick="ss(this,'sun')">Tan very quickly and deeply</div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:10px">
+    <div class="ql">Feature contrast</div>
+    <div class="qt">How different are your lightest and darkest features?</div>
+    <div class="qhint">Take a black-and-white photo — how much variation do you see?</div>
+    <div class="slist" id="cont-l">
+      <div class="sopt" data-v="low" onclick="ss(this,'contrast')">Low — all features blend, similarly light or muted</div>
+      <div class="sopt" data-v="medium" onclick="ss(this,'contrast')">Medium — some variation between features</div>
+      <div class="sopt" data-v="high" onclick="ss(this,'contrast')">High — sharp difference e.g. dark hair + light skin</div>
+    </div>
+  </div>
+  <div class="cta"><button class="btng" onclick="go('s2')">Back</button><button class="btnp" id="n3" onclick="go('s4')" disabled>Next</button></div>
+</div>
+
+<!-- S4 -->
+<div id="s4" style="display:none">
+  <div class="hero">
+    <div class="eyebrow">Step 4 of 4</div>
+    <h1 class="htitle">Chroma <em>&</em><br>clarity</h1>
+    <p class="hsub">Chroma is how bright or muted your natural coloring is — it determines whether you need vivid or soft, toned-down colors.</p>
+  </div>
+  <div class="deco"><hr><span></span><hr></div>
+  <div class="card">
+    <div class="ql">The grey test</div>
+    <div class="qt">How does a plain grey outfit look on you?</div>
+    <div class="slist" id="grey-l">
+      <div class="sopt" data-v="grey-suits" onclick="ss(this,'grey')">It looks elegant and suits me well</div>
+      <div class="sopt" data-v="grey-washes" onclick="ss(this,'grey')">It washes me out and looks dull on me</div>
+      <div class="sopt" data-v="grey-okay" onclick="ss(this,'grey')">It's okay but color works much better</div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:10px">
+    <div class="ql">Your natural coloring</div>
+    <div class="qt">Which best describes the quality of your features?</div>
+    <div class="slist" id="chroma-l">
+      <div class="sopt" data-v="clear-vivid" onclick="ss(this,'chroma')">Clear and vivid — saturated, features pop with no greyness</div>
+      <div class="sopt" data-v="soft-muted" onclick="ss(this,'chroma')">Soft and muted — ashy, dusty, features blend together</div>
+      <div class="sopt" data-v="medium-chroma" onclick="ss(this,'chroma')">In between — not extremely bright or extremely muted</div>
+    </div>
+  </div>
+  <div class="cta"><button class="btng" onclick="go('s3')">Back</button><button class="btnp" id="n4" onclick="analyze()" disabled>Find my season</button></div>
+</div>
+
+<!-- LOADING -->
+<div id="loading" style="display:none">
+  <div class="loading">
+    <div class="ring"></div>
+    <p class="ltxt" id="lmsg">Analyzing your coloring...</p>
+  </div>
+</div>
+
+<!-- RESULT -->
+<div id="result" style="display:none">
+  <div class="prog" style="margin-top:20px">
+    <div class="pd d"></div><div class="pd d"></div><div class="pd d"></div><div class="pd d"></div>
+    <span class="plbl">Your season</span>
+  </div>
+  <div class="rwrap" id="result-inner"></div>
+</div>
+
+<div id="error" style="display:none">
+  <p class="etxt" id="etxt">Something went wrong. Please try again.</p>
+  <div class="cta"><button class="btng" onclick="go('s4')">Try again</button></div>
+</div>
+
+</div>
+
+<script>
+// ── API KEY — paste yours here ──
+const API_KEY = 'YOUR_API_KEY_HERE';
+
+// ── State ──
+const S = {tone:null,under:null,metal:null,hair:null,eye:null,sun:null,contrast:null,grey:null,chroma:null};
+
+// ── Built-in season database ──
+const SEASONS = {
+  'True Spring':{
+    poeticName:'The golden bloom',
+    tagline:'Warm, clear, and luminous — you carry the brightness of a sunlit spring morning.',
+    description:'Your coloring has a warm golden quality that radiates natural brightness. Features are clear and saturated with no greyness, giving you a fresh, luminous appearance.',
+    whySeason:'As a True Spring, your primary aspect is warm with bright as secondary — your features have clear yellow undertones and high saturation without the depth of Autumn.',
+    palette:[{n:'Coral',h:'#E8714A'},{n:'Warm peach',h:'#F2A67D'},{n:'Golden yellow',h:'#F2C94C'},{n:'Clear turquoise',h:'#4ECDC4'},{n:'Warm green',h:'#7BC67E'},{n:'Ivory',h:'#FFF8EC'}],
+    neutrals:[{n:'Camel',h:'#C4965A'},{n:'Warm beige',h:'#E8D5B0'},{n:'Soft white',h:'#FBF6EE'}],
+    avoid:[{n:'Black',h:'#1A1A1A'},{n:'Cool grey',h:'#9BA3AE'},{n:'Burgundy',h:'#722F37'},{n:'Navy',h:'#1F305E'}],
+    avoidReason:'Black and cool, blue-based colors clash with warm undertones and create a harsh, draining effect.',
+    stylistNote:'Reach for clear, warm colors that match your own natural vibrancy. Coral, peach, and warm turquoise will make your eyes pop and your skin glow.',
+    makeup:'Warm coral and peach lips · peachy-apricot blush · warm golden bronze eye shadow',
+    metal:'Gold — it echoes the warm golden undertones in your skin and hair.',
+    anthroLinks:[
+      {label:'Shop coral & orange at Anthropologie',url:'https://www.anthropologie.com/clothing?color=orange'},
+      {label:'Shop yellow & golden tones',url:'https://www.anthropologie.com/clothing?color=yellow'},
+      {label:'Shop warm greens',url:'https://www.anthropologie.com/clothing?color=green'},
+      {label:'Shop new arrivals',url:'https://www.anthropologie.com/new-clothes'}
+    ]
+  },
+  'Light Spring':{
+    poeticName:'The soft petal',
+    tagline:'Delicate, warm, and light — your coloring is as fresh as the first flowers of spring.',
+    description:'You have light, warm coloring with low contrast between your features. Everything about you is soft, clear, and golden-light — never heavy or dark.',
+    whySeason:'Light is your primary aspect with warm as secondary. All features are similarly light, creating low contrast. You need the lightest, freshest colors from the warm family.',
+    palette:[{n:'Soft peach',h:'#F7C5A0'},{n:'Light coral',h:'#F09070'},{n:'Pale gold',h:'#F5D98A'},{n:'Aqua',h:'#7ECECA'},{n:'Light green',h:'#A8D5A2'},{n:'Warm blush',h:'#EDBCAC'}],
+    neutrals:[{n:'Warm white',h:'#FBF4EC'},{n:'Light camel',h:'#D9B88A'},{n:'Soft linen',h:'#EDE0CC'}],
+    avoid:[{n:'Black',h:'#1A1A1A'},{n:'Dark navy',h:'#1F305E'},{n:'Deep burgundy',h:'#722F37'},{n:'Charcoal',h:'#36454F'}],
+    avoidReason:'Dark, heavy colors overwhelm light coloring and create an aging, draining effect.',
+    stylistNote:'Light, colorful tints are your best friend. Think pastel peach, light coral, and soft aqua — colors that feel like a breath of fresh air.',
+    makeup:'Soft peachy-pink lips · light apricot blush · soft golden shimmer lids',
+    metal:'Gold — your warm light coloring glows next to yellow gold.',
+    anthroLinks:[
+      {label:'Shop peach & blush tones',url:'https://www.anthropologie.com/clothing?color=pink'},
+      {label:'Shop light, fresh colors',url:'https://www.anthropologie.com/new-clothes'},
+      {label:'Shop Maeve spring dresses',url:'https://www.anthropologie.com/shop-maeve'}
+    ]
+  },
+  'Bright Spring':{
+    poeticName:'The vivid bloom',
+    tagline:'Striking, clear, and warm — your coloring demands colors that are as vibrant as you are.',
+    description:'Your features are highly contrasted and saturated. Eyes are clear and vivid, standing out against your skin, with warm golden undertones running through everything.',
+    whySeason:'Bright is your primary aspect with warm as secondary. Your coloring flows from Winter brightness into Spring warmth — you need the most saturated, fresh warm colors.',
+    palette:[{n:'Hot coral',h:'#FF6B47'},{n:'Bright turquoise',h:'#00B4C8'},{n:'Clear green',h:'#5AAF5F'},{n:'Warm yellow',h:'#F5C842'},{n:'Bright orange',h:'#F07030'},{n:'Clear red',h:'#D93025'}],
+    neutrals:[{n:'Warm white',h:'#FBF5EC'},{n:'Tan',h:'#C4905A'},{n:'Warm grey',h:'#B8A898'}],
+    avoid:[{n:'Dusty rose',h:'#C9899A'},{n:'Muted olive',h:'#8A8C5A'},{n:'Soft grey',h:'#AEAEAD'},{n:'Ash brown',h:'#8C7868'}],
+    avoidReason:'Muted and dusty colors drain your vibrancy and make your naturally bright features look dull.',
+    stylistNote:'You can wear highly saturated colors without them overwhelming you — lean into bold coral, clear green, and bright turquoise.',
+    makeup:'Bright warm red or coral lips · warm peach blush · bronze and copper lids',
+    metal:'Gold with a bright finish — you can pull off statement gold jewelry beautifully.',
+    anthroLinks:[
+      {label:'Shop bold brights at Anthropologie',url:'https://www.anthropologie.com/clothing?color=orange'},
+      {label:'Shop red & coral tones',url:'https://www.anthropologie.com/clothing?color=red'},
+      {label:'Shop turquoise & teal',url:'https://www.anthropologie.com/clothing?color=blue'}
+    ]
+  },
+  'True Summer':{
+    poeticName:'The cool mist',
+    tagline:'Soft, cool, and effortlessly elegant — your palette is the gentle haze of a perfect summer afternoon.',
+    description:'Your coloring is cool and muted with low to medium contrast. Features have a blended, soft quality — nothing too vivid, everything harmonious and gentle.',
+    whySeason:'Cool is your primary aspect with muted as secondary. Your skin has cool undertones and your features lack the grey content of Soft Summer but share its gentleness.',
+    palette:[{n:'Dusty rose',h:'#D4A0A8'},{n:'Cool blue',h:'#7EB0CC'},{n:'Lavender',h:'#B8A8D4'},{n:'Soft pink',h:'#E8B8C0'},{n:'Powder blue',h:'#A8C4D8'},{n:'Rose mauve',h:'#C08898'}],
+    neutrals:[{n:'Soft white',h:'#F5F0F0'},{n:'Cool grey',h:'#C0BCBC'},{n:'Rose beige',h:'#D8C8C0'}],
+    avoid:[{n:'Warm orange',h:'#D86020'},{n:'Mustard',h:'#C4942A'},{n:'Olive',h:'#7A8040'},{n:'Brown',h:'#8A6040'}],
+    avoidReason:'Warm, yellow-based colors bring out sallowness and clash with your naturally cool, pink undertones.',
+    stylistNote:'Your best colors are soft and cool — dusty rose, powder blue, and lavender will make your complexion look clear and luminous.',
+    makeup:'Cool rose or berry lips · soft cool pink blush · cool mauve or soft plum lids',
+    metal:'Silver — it echoes the cool clarity of your natural coloring.',
+    anthroLinks:[
+      {label:'Shop lavender & purple at Anthropologie',url:'https://www.anthropologie.com/dresses?color=purple'},
+      {label:'Shop blue & dusty tones',url:'https://www.anthropologie.com/clothing?color=blue'},
+      {label:'Shop pink & rose tones',url:'https://www.anthropologie.com/clothing?color=pink'}
+    ]
+  },
+  'Light Summer':{
+    poeticName:'The morning haze',
+    tagline:'Cool, light, and quietly luminous — your coloring is as delicate as early morning light over water.',
+    description:'You have very light, cool coloring with low contrast between all features. Everything about you is soft, pale, and cool-toned — a portrait in gentle pastels.',
+    whySeason:'Light is your primary aspect with cool as secondary. All features are similarly light and cool, creating minimal contrast. Darkness overwhelms you; light tints are your superpower.',
+    palette:[{n:'Powder blue',h:'#A8C4D8'},{n:'Soft lavender',h:'#C8B8D8'},{n:'Pale pink',h:'#EAC8D0'},{n:'Ice blue',h:'#C4D8E8'},{n:'Soft mint',h:'#B0D4C8'},{n:'Blush',h:'#E8C0C0'}],
+    neutrals:[{n:'Soft white',h:'#F8F4F4'},{n:'Silver grey',h:'#C8C4C4'},{n:'Cool blush',h:'#E0CCCC'}],
+    avoid:[{n:'Black',h:'#1A1A1A'},{n:'Deep navy',h:'#1A2A4A'},{n:'Warm brown',h:'#8A6040'},{n:'Orange',h:'#D86020'}],
+    avoidReason:'Dark colors age light coloring instantly. Warm, orange-based colors conflict with cool undertones.',
+    stylistNote:'Light, cool tints are transformative on you — powder blue, soft lavender, and pale blush create a luminous, romantic effect.',
+    makeup:'Pale cool pink lips · soft rose blush · lavender or soft grey lids',
+    metal:'Silver — warm gold pulls yellow from cool skin.',
+    anthroLinks:[
+      {label:'Shop light blue & sky tones',url:'https://www.anthropologie.com/dresses?color=blue'},
+      {label:'Shop soft lavender & purple',url:'https://www.anthropologie.com/dresses?color=purple'},
+      {label:'Shop blush & pale pink',url:'https://www.anthropologie.com/clothing?color=pink'}
+    ]
+  },
+  'Soft Summer':{
+    poeticName:'The twilight bloom',
+    tagline:'Muted, cool, and quietly sophisticated — your palette is the hazy beauty of a late summer evening.',
+    description:'Your coloring has a distinctive soft, muted quality — features blend together harmoniously with an ashy, cool undertone. There is elegance in your understated appearance.',
+    whySeason:'Muted is your primary aspect with cool as secondary. Your coloring has a high grey content, making vivid colors overwhelming. Soft, desaturated cool tones are your signature.',
+    palette:[{n:'Dusty mauve',h:'#B89098'},{n:'Muted blue',h:'#8AAAB8'},{n:'Soft sage',h:'#98A898'},{n:'Grey lavender',h:'#A8A0B8'},{n:'Rose grey',h:'#C0A8A8'},{n:'Dusty teal',h:'#80A0A0'}],
+    neutrals:[{n:'Warm grey',h:'#BCBAB8'},{n:'Soft white',h:'#F4F0F0'},{n:'Taupe',h:'#C0B0A8'}],
+    avoid:[{n:'Bright orange',h:'#E86030'},{n:'Hot pink',h:'#D04080'},{n:'Bright yellow',h:'#F0D020'},{n:'Vivid green',h:'#40B040'}],
+    avoidReason:'Highly saturated colors steal the show completely and wash out your naturally soft, muted features.',
+    stylistNote:'Dusty, muted tones give you a graceful sophistication that vivid colors simply cannot. Lean into mauve, muted sage, and soft grey-blue.',
+    makeup:'Dusty rose or muted berry lips · soft rose blush · cool grey-brown or mauve lids',
+    metal:'Silver or white gold — both complement your cool muted coloring.',
+    anthroLinks:[
+      {label:'Shop dusty rose & mauve',url:'https://www.anthropologie.com/clothing?color=pink'},
+      {label:'Shop muted blue & grey tones',url:'https://www.anthropologie.com/clothing?color=blue'},
+      {label:'Shop sage & dusty green',url:'https://www.anthropologie.com/clothing?color=green'}
+    ]
+  },
+  'True Autumn':{
+    poeticName:'The golden harvest',
+    tagline:'Warm, rich, and deeply earthy — your coloring mirrors the breathtaking richness of autumn foliage.',
+    description:'Your features radiate a rich, warm golden quality. Skin has obvious golden or caramel undertones, hair has warm highlights, and eyes carry amber or earthy warmth.',
+    whySeason:'Warm is your primary aspect with muted as secondary. Your coloring is the richest and warmest of all seasons — you need earthy, saturated warm colors rather than bright ones.',
+    palette:[{n:'Rust',h:'#C4582A'},{n:'Warm olive',h:'#8A9440'},{n:'Mustard',h:'#C4982A'},{n:'Burnt orange',h:'#D4702A'},{n:'Caramel',h:'#C48040'},{n:'Forest green',h:'#4A7840'}],
+    neutrals:[{n:'Warm brown',h:'#8A6840'},{n:'Camel',h:'#C49860'},{n:'Cream',h:'#F0E4CC'}],
+    avoid:[{n:'Cool pink',h:'#D490A0'},{n:'Icy blue',h:'#90B8D4'},{n:'Black',h:'#1A1A1A'},{n:'Cool purple',h:'#8870B8'}],
+    avoidReason:'Cool, blue-based colors fight the natural warmth of your features and create a sallow, muddy effect.',
+    stylistNote:'Reach for earthy richness — rust, mustard, warm olive, and burnt orange create incredible harmony with your golden-warm coloring.',
+    makeup:'Warm brown, terracotta or brick red lips · warm peach or apricot blush · bronze and warm brown lids',
+    metal:'Gold — warm yellow gold is the only metal for True Autumn.',
+    anthroLinks:[
+      {label:'Shop rust & terracotta at Anthropologie',url:'https://www.anthropologie.com/clothing?color=orange'},
+      {label:'Shop mustard & golden tones',url:'https://www.anthropologie.com/clothing?color=yellow'},
+      {label:'Shop warm olive & green',url:'https://www.anthropologie.com/clothing?color=green'},
+      {label:'Shop earthy browns',url:'https://www.anthropologie.com/clothing?color=brown'}
+    ]
+  },
+  'Soft Autumn':{
+    poeticName:'The wheat field',
+    tagline:'Muted, warm, and quietly stunning — your palette is the soft, hazy beauty of late harvest fields.',
+    description:'Your coloring has a gentle, muted warmth. Features blend together softly with no stark contrasts — a warm greyness runs through your hair, skin, and eyes.',
+    whySeason:'Muted is your primary aspect with warm as secondary. Your Autumn warmth is softened by a high grey content — you need colors that are warm but never vivid or bright.',
+    palette:[{n:'Muted terracotta',h:'#C07858'},{n:'Warm taupe',h:'#B0987A'},{n:'Dusty olive',h:'#909060'},{n:'Rose brown',h:'#B88878'},{n:'Warm sage',h:'#90A078'},{n:'Wheat',h:'#D4B888'}],
+    neutrals:[{n:'Warm cream',h:'#EEE0C8'},{n:'Camel',h:'#C0A070'},{n:'Warm grey',h:'#B8B0A0'}],
+    avoid:[{n:'Bright orange',h:'#E86020'},{n:'Hot pink',h:'#D04080'},{n:'Black',h:'#1A1A1A'},{n:'Icy blue',h:'#90B8D4'}],
+    avoidReason:'Bright, saturated colors overpower muted coloring. Cool colors fight natural warmth.',
+    stylistNote:'Warm, muted tones are where you shine — dusty olive, rose brown, and wheat tones create a naturally harmonious, effortless look.',
+    makeup:'Warm nude, dusty rose or brick lips · warm peachy-brown blush · warm taupe or mocha lids',
+    metal:'Gold — warm matte gold over shiny, to match your muted warmth.',
+    anthroLinks:[
+      {label:'Shop warm neutrals at Anthropologie',url:'https://www.anthropologie.com/clothing?color=brown'},
+      {label:'Shop muted earth tones',url:'https://www.anthropologie.com/clothing?color=orange'},
+      {label:'Shop warm olive & sage',url:'https://www.anthropologie.com/clothing?color=green'}
+    ]
+  },
+  'Dark Autumn':{
+    poeticName:'The spiced evening',
+    tagline:'Deep, warm, and dramatic — your rich coloring commands depth and intensity.',
+    description:'Your features are dark and warm with high contrast. Deep hair and eyes set against warmer skin create a striking, rich appearance full of earthy drama.',
+    whySeason:'Dark is your primary aspect with warm as secondary. Flowing from Autumn into Winter, you share Autumn warmth but need deeper, more intense colors than True Autumn.',
+    palette:[{n:'Deep burgundy',h:'#722A30'},{n:'Dark olive',h:'#5A6830'},{n:'Spice brown',h:'#8A4820'},{n:'Deep teal',h:'#2A5858'},{n:'Dark mustard',h:'#988020'},{n:'Plum',h:'#602840'}],
+    neutrals:[{n:'Dark chocolate',h:'#4A2818'},{n:'Warm charcoal',h:'#4A4030'},{n:'Deep camel',h:'#907040'}],
+    avoid:[{n:'Cool pink',h:'#D490A0'},{n:'Icy lavender',h:'#C0B0D8'},{n:'Bright white',h:'#F8F8F8'},{n:'Pastel yellow',h:'#F0E090'}],
+    avoidReason:'Light pastels and cool colors completely wash out deep, warm coloring.',
+    stylistNote:'Your coloring is made for depth and richness — deep burgundy, dark olive, and spiced brown make your eyes and hair absolutely glow.',
+    makeup:'Deep brick, plum or warm red lips · warm bronze blush · smoky warm brown or copper lids',
+    metal:'Gold — warm and rich to match your depth.',
+    anthroLinks:[
+      {label:'Shop deep burgundy & wine',url:'https://www.anthropologie.com/clothing?color=red'},
+      {label:'Shop rich browns & chocolate',url:'https://www.anthropologie.com/clothing?color=brown'},
+      {label:'Shop deep olive & forest green',url:'https://www.anthropologie.com/clothing?color=green'}
+    ]
+  },
+  'True Winter':{
+    poeticName:'The midnight frost',
+    tagline:'Cool, bold, and high-contrast — your coloring has the striking clarity of a winter landscape.',
+    description:'Your features are cool, dark, and highly contrasted. Dark hair and eyes against cool-toned skin create a dramatic, striking appearance with no warmth or muddiness.',
+    whySeason:'Cool is your primary aspect with dark as secondary. True Winter coloring requires pure, icy cool colors and deep darks — nothing muted or warm.',
+    palette:[{n:'Icy pink',h:'#F0B0C0'},{n:'True red',h:'#C82020'},{n:'Royal blue',h:'#2040A8'},{n:'Emerald',h:'#18785A'},{n:'Pure white',h:'#F8F8F8'},{n:'Black',h:'#0A0A0A'}],
+    neutrals:[{n:'Pure white',h:'#F8F8F8'},{n:'True black',h:'#0A0A0A'},{n:'Cool grey',h:'#909090'}],
+    avoid:[{n:'Warm orange',h:'#D86020'},{n:'Mustard',h:'#C4942A'},{n:'Warm brown',h:'#8A6040'},{n:'Warm beige',h:'#D8C0A0'}],
+    avoidReason:'Warm, yellow-based colors clash with cool undertones and create a sallow, unwell appearance.',
+    stylistNote:'You are one of the few who can wear true black, pure white, and vivid jewel tones with equal power. Lean into that stark, striking contrast.',
+    makeup:'True red, cool berry or fuchsia lips · cool pink blush · cool grey, navy or plum lids',
+    metal:'Silver — the cooler and crisper the better.',
+    anthroLinks:[
+      {label:'Shop red & cool red tones',url:'https://www.anthropologie.com/dresses?color=red'},
+      {label:'Shop royal blue & navy',url:'https://www.anthropologie.com/dresses?color=blue'},
+      {label:'Shop black & contrast pieces',url:'https://www.anthropologie.com/clothing?color=black'}
+    ]
+  },
+  'Dark Winter':{
+    poeticName:'The deep velvet',
+    tagline:'Dark, cool, and intensely striking — your coloring has the depth of a winter night sky.',
+    description:'You have very dark features with cool undertones. The depth and darkness of your hair and eyes create high contrast against your skin, with a cool, dramatic quality.',
+    whySeason:'Dark is your primary aspect with cool as secondary. Flowing from Autumn depth into Winter coolness, you need very dark colors with Winter brightness and coolness.',
+    palette:[{n:'Deep navy',h:'#1A2A5A'},{n:'Dark plum',h:'#502048'},{n:'Burgundy',h:'#702030'},{n:'Deep emerald',h:'#1A5840'},{n:'Dark teal',h:'#1A4848'},{n:'Charcoal',h:'#383838'}],
+    neutrals:[{n:'True black',h:'#0A0A0A'},{n:'Cool charcoal',h:'#383838'},{n:'Dark navy',h:'#1A2848'}],
+    avoid:[{n:'Warm beige',h:'#D8C0A0'},{n:'Mustard',h:'#C4942A'},{n:'Light pastels',h:'#E8D0D0'},{n:'Orange',h:'#D86020'}],
+    avoidReason:'Light pastels and warm colors wash out dark coloring and fight cool undertones.',
+    stylistNote:'Your coloring thrives in deep, dark jewel tones. Navy, deep plum, and dark emerald make your striking features truly unforgettable.',
+    makeup:'Dark berry, wine or deep plum lips · soft cool rose blush · smoky cool grey or deep plum lids',
+    metal:'Silver — and you can wear dramatic, bold silver jewelry magnificently.',
+    anthroLinks:[
+      {label:'Shop deep navy & indigo',url:'https://www.anthropologie.com/clothing?color=blue'},
+      {label:'Shop dark plum & wine',url:'https://www.anthropologie.com/clothing?color=purple'},
+      {label:'Shop deep emerald & forest',url:'https://www.anthropologie.com/clothing?color=green'}
+    ]
+  },
+  'Bright Winter':{
+    poeticName:'The icy crystal',
+    tagline:'Clear, cool, and vivid — your coloring has the pure striking brilliance of winter ice.',
+    description:'Your features are highly contrasted and saturated with cool undertones. Clear, vivid eyes stand out against your skin in a striking, high-chroma winter way.',
+    whySeason:'Bright is your primary aspect with cool as secondary. You share Winter coolness but need the highest saturation — pure, icy, vivid colors rather than deep ones.',
+    palette:[{n:'Fuchsia',h:'#D02080'},{n:'Icy blue',h:'#60B0E0'},{n:'Electric green',h:'#20C060'},{n:'Cool red',h:'#D02020'},{n:'Bright violet',h:'#7020C0'},{n:'Pure white',h:'#F8F8F8'}],
+    neutrals:[{n:'Pure white',h:'#F8F8F8'},{n:'True black',h:'#0A0A0A'},{n:'Cool grey',h:'#909090'}],
+    avoid:[{n:'Warm orange',h:'#D86020'},{n:'Mustard yellow',h:'#C4942A'},{n:'Dusty rose',h:'#C09898'},{n:'Warm brown',h:'#8A6040'}],
+    avoidReason:'Muted and warm colors dull your naturally vivid, high-contrast coloring.',
+    stylistNote:'You thrive in pure, icy saturation — fuchsia, electric blue, and sharp white-and-black contrasts are made for your striking coloring.',
+    makeup:'Cool fuchsia, berry or true red lips · cool pink blush · vivid cool lid colors',
+    metal:'Silver — bright, high-polish silver jewelry is your statement piece.',
+    anthroLinks:[
+      {label:'Shop vivid pink & fuchsia',url:'https://www.anthropologie.com/clothing?color=pink'},
+      {label:'Shop icy blue & bright blue',url:'https://www.anthropologie.com/clothing?color=blue'},
+      {label:'Shop bold contrast pieces',url:'https://www.anthropologie.com/new-clothes'}
+    ]
+  }
+};
+
+// ── Season determination logic ──
+function determineSeason() {
+  const {tone,under,metal,hair,eye,sun,contrast,grey,chroma} = S;
+
+  // Determine warmth
+  const isWarm = under==='warm' || metal==='gold' ||
+    ['golden-blonde','strawberry-blonde','warm-brown','auburn-copper'].includes(hair) ||
+    ['teal-turquoise','olive-green','warm-hazel','light-brown'].includes(eye);
+  const isCool = under==='cool' || metal==='silver' ||
+    ['platinum-white','ash-blonde','ash-brown','dark-red','silver-grey','black'].includes(hair) ||
+    ['bright-blue','grey-blue','cool-grey','grey-green','cool-hazel'].includes(eye);
+  const isOlive = under==='olive';
+
+  // Determine value/depth
+  const isDark = ['dark-brown','black'].includes(hair) && ['dark-brown','medium-brown'].includes(eye);
+  const isLight = ['platinum-white','golden-blonde','ash-blonde','light-brown'].includes(hair) &&
+    ['fair','light'].includes(tone);
+  const isVeryLight = isLight && ['burns-rarely-tans','burns-then-tans'].includes(sun) && contrast==='low';
+
+  // Determine chroma
+  const isBright = chroma==='clear-vivid' || grey==='grey-washes';
+  const isMuted = chroma==='soft-muted' || grey==='grey-suits';
+
+  // High contrast flag
+  const isHighContrast = contrast==='high' || (isDark && ['fair','light','medium'].includes(tone));
+
+  // ── Decision tree ──
+  // WINTER family: cool + bright/dark
+  if(isCool && !isWarm) {
+    if(isBright && isHighContrast) return 'Bright Winter';
+    if(isDark || ['deep','rich','tan'].includes(tone)) return 'Dark Winter';
+    return 'True Winter';
+  }
+
+  // SPRING family: warm + bright/light
+  if(isWarm && !isCool) {
+    if(isVeryLight || isLight) return 'Light Spring';
+    if(isBright && isHighContrast) return 'Bright Spring';
+    return 'True Spring';
+  }
+
+  // AUTUMN family: warm + muted/dark
+  if((isWarm || isOlive) && isMuted) {
+    if(isDark || ['deep','rich'].includes(tone)) return 'Dark Autumn';
+    if(isMuted) return 'Soft Autumn';
+    return 'True Autumn';
+  }
+
+  // SUMMER family: cool + muted/light
+  if(isCool && isMuted) {
+    if(isVeryLight) return 'Light Summer';
+    if(isMuted) return 'Soft Summer';
+    return 'True Summer';
+  }
+
+  // Neutral/olive tiebreakers
+  if(isOlive) {
+    if(isDark) return 'Dark Autumn';
+    return 'True Autumn';
+  }
+
+  // Neutral with light features → Summer
+  if(under==='neutral' || metal==='both') {
+    if(isLight) return 'Light Summer';
+    if(isDark) return 'Dark Winter';
+    if(isBright) return 'True Winter';
+    if(isMuted) return 'Soft Summer';
+    return 'True Summer';
+  }
+
+  // Final fallbacks by depth
+  if(isDark && isHighContrast) return 'True Winter';
+  if(isLight) return 'Light Spring';
+  return 'True Summer';
+}
+
+// ── Sel helpers ──
+function selT(el){document.querySelectorAll('.ts').forEach(s=>s.classList.remove('sel'));el.classList.add('sel');S.tone=el.dataset.v;v()}
+function selU(el){document.querySelectorAll('.uopt').forEach(o=>o.classList.remove('sel'));el.classList.add('sel');S.under=el.dataset.v;v()}
+function selM(el){document.querySelectorAll('.mopt').forEach(o=>o.classList.remove('sel'));el.classList.add('sel');S.metal=el.dataset.v;v()}
+function c1(el,k){document.getElementById(k+'-c').querySelectorAll('.chip').forEach(c=>c.classList.remove('sel'));el.classList.add('sel');S[k]=el.dataset.v;v()}
+function ss(el,k){el.closest('.slist').querySelectorAll('.sopt').forEach(o=>o.classList.remove('sel'));el.classList.add('sel');S[k]=el.dataset.v;v()}
+
+function v(){
+  const ok1=S.tone&&S.under&&S.metal;
+  const ok2=S.hair&&S.eye;
+  const ok3=S.sun&&S.contrast;
+  const ok4=S.grey&&S.chroma;
+  ['n1','n2','n3','n4'].forEach((id,i)=>{
+    const el=document.getElementById(id);
+    if(el) el.disabled=![ok1,ok2,ok3,ok4][i];
+  });
+}
+
+function go(id){
+  ['s1','s2','s3','s4','loading','result','error'].forEach(x=>{
+    const el=document.getElementById(x);
+    if(el) el.style.display=x===id?'':'none';
+  });
+  window.scrollTo(0,0);
+}
+
+// Loading messages
+const MSGS=['Analyzing your coloring...','Identifying your primary aspect...','Matching to your season...','Curating your palette...'];
+function cycleMsgs(el,msgs){let i=0;el.textContent=msgs[0];return setInterval(()=>{i=(i+1)%msgs.length;el.textContent=msgs[i];},2000)}
+
+async function analyze(){
+  go('loading');
+  const el=document.getElementById('lmsg');
+  const timer=cycleMsgs(el,MSGS);
+
+  // First determine season locally
+  const season=determineSeason();
+  const base=SEASONS[season];
+
+  // Try AI to enrich the description if API key is set
+  if(API_KEY && API_KEY!=='YOUR_API_KEY_HERE'){
+    try{
+      const prompt=`You are a professional color analyst. A client has: skin depth=${S.tone}, undertone=${S.under}, metal=${S.metal}, hair=${S.hair}, eyes=${S.eye}, sun reaction=${S.sun}, contrast=${S.contrast}, grey test=${S.grey}, chroma=${S.chroma}. Their season is ${season}. Write a JSON with two fields only: "coloringDescription" (2 sentences about their specific natural coloring, mentioning their actual hair/eye/skin details) and "stylistNote" (2 warm editorial sentences about how to wear their best colors). No preamble, no markdown.`;
+      const resp=await fetch('https://api.anthropic.com/v1/messages',{
+        method:'POST',
+        headers:{'Content-Type':'application/json','x-api-key':API_KEY,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+        body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:400,messages:[{role:'user',content:prompt}]})
+      });
+      const data=await resp.json();
+      const txt=data.content.map(b=>b.text||'').join('').replace(/```json|```/g,'').trim();
+      const ai=JSON.parse(txt);
+      if(ai.coloringDescription) base.description=ai.coloringDescription;
+      if(ai.stylistNote) base.stylistNote=ai.stylistNote;
+    }catch(e){}
+  }
+
+  clearInterval(timer);
+  render(season,base);
+}
+
+function palHtml(arr,cls){
+  return '<div style="display:flex;gap:6px;margin-bottom:6px">'+arr.map(p=>`<div style="flex:1"><div class="${cls}" style="background:${p.h}"></div><div class="pname">${p.n}</div></div>`).join('')+'</div>';
+}
+
+function seasonSVG(season){
+  const configs={
+    'True Spring':{bg:'#FFF4E8',colors:['#E8714A','#F2A67D','#F2C94C','#4ECDC4','#7BC67E'],label:'Warm · Bright · Light'},
+    'Light Spring':{bg:'#FFF8F0',colors:['#F7C5A0','#F09070','#F5D98A','#7ECECA','#A8D5A2'],label:'Light · Warm · Clear'},
+    'Bright Spring':{bg:'#FFF5EC',colors:['#FF6B47','#00B4C8','#5AAF5F','#F5C842','#F07030'],label:'Bright · Warm · Clear'},
+    'True Summer':{bg:'#F4F0F8',colors:['#D4A0A8','#7EB0CC','#B8A8D4','#E8B8C0','#A8C4D8'],label:'Cool · Muted · Soft'},
+    'Light Summer':{bg:'#F0F4F8',colors:['#A8C4D8','#C8B8D8','#EAC8D0','#C4D8E8','#B0D4C8'],label:'Light · Cool · Soft'},
+    'Soft Summer':{bg:'#F0EEF4',colors:['#B89098','#8AAAB8','#98A898','#A8A0B8','#C0A8A8'],label:'Muted · Cool · Soft'},
+    'True Autumn':{bg:'#FBF0E8',colors:['#C4582A','#8A9440','#C4982A','#D4702A','#C48040'],label:'Warm · Muted · Rich'},
+    'Soft Autumn':{bg:'#F8F0E8',colors:['#C07858','#B0987A','#909060','#B88878','#90A078'],label:'Muted · Warm · Soft'},
+    'Dark Autumn':{bg:'#F0E8E0',colors:['#722A30','#5A6830','#8A4820','#2A5858','#602840'],label:'Dark · Warm · Rich'},
+    'True Winter':{bg:'#F0F0F8',colors:['#F0B0C0','#C82020','#2040A8','#18785A','#0A0A0A'],label:'Cool · Bright · Dark'},
+    'Dark Winter':{bg:'#ECEAF4',colors:['#1A2A5A','#502048','#702030','#1A5840','#383838'],label:'Dark · Cool · Bright'},
+    'Bright Winter':{bg:'#F4F0F8',colors:['#D02080','#60B0E0','#20C060','#D02020','#7020C0'],label:'Bright · Cool · Vivid'}
+  };
+  const c=configs[season]||configs['True Summer'];
+  const swatches=c.colors.map((col,i)=>`<rect x="${20+i*54}" y="20" width="46" height="56" rx="8" fill="${col}"/>`).join('');
+  return `<svg width="100%" viewBox="0 0 300 96" xmlns="http://www.w3.org/2000/svg" style="display:block;border-radius:12px">
+    <rect width="300" height="96" fill="${c.bg}" rx="12"/>
+    ${swatches}
+    <text x="150" y="86" text-anchor="middle" font-family="Jost,sans-serif" font-size="9" fill="#8C8379" letter-spacing="2">${c.label.toUpperCase()}</text>
+  </svg>`;
+}
+
+function render(season,d){
+  const el=document.getElementById('result-inner');
+  el.innerHTML=`
+    <div style="margin-top:14px">
+      <div class="sbadge">${season}</div>
+      <h2 class="stitle"><em>${d.poeticName}</em></h2>
+      <p class="stagline">${d.tagline}</p>
+
+      <div class="season-visual">${seasonSVG(season)}</div>
+
+      <div class="nbar">
+        <div class="nlbl">Your coloring</div>
+        <div class="nbody">${d.description}</div>
+      </div>
+      <div class="nbar">
+        <div class="nlbl">Why this season</div>
+        <div class="nbody">${d.whySeason}</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="rcard">
+        <div class="rlbl">Wear these colors</div>
+        ${palHtml(d.palette,'pswatch')}
+        <div class="rlbl" style="margin-top:12px">Your best neutrals</div>
+        ${palHtml(d.neutrals,'pswatch')}
+      </div>
+
+      <div class="rcard">
+        <div class="rlbl">Avoid these</div>
+        <div class="avoidrow">${d.avoid.map(a=>`<div class="aswatch" style="background:${a.h}"></div>`).join('')}</div>
+        <div style="font-size:11px;color:var(--stone);line-height:1.6">${d.avoidReason}</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="nbar">
+        <div class="nlbl">Stylist's note</div>
+        <div class="nbody">${d.stylistNote}</div>
+      </div>
+
+      <div class="rcard">
+        <div class="rlbl">Makeup</div>
+        <div class="nbody plain" style="color:var(--charcoal);margin-bottom:12px">${d.makeup}</div>
+        <div class="rlbl">Best metal</div>
+        <div class="nbody plain" style="color:var(--charcoal)">${d.metal}</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="anthro-section">
+        <div class="anthro-title">Shop your season at Anthropologie</div>
+        <div class="anthro-sub">These links filter directly to colors that work for your ${season} palette.</div>
+        <div class="anthro-links">
+          ${d.anthroLinks.map(l=>`<a class="alink" href="${l.url}" target="_blank"><span class="alink-text">${l.label}</span><span class="alink-arrow">→</span></a>`).join('')}
+        </div>
+      </div>
+
+      <button class="restart" onclick="restart()">Start over</button>
+    </div>`;
+  go('result');
+}
+
+function restart(){
+  Object.keys(S).forEach(k=>S[k]=null);
+  document.querySelectorAll('.ts,.uopt,.mopt,.chip,.sopt').forEach(el=>el.classList.remove('sel'));
+  go('s1');v();
+}
+</script>
+</body>
+</html>
