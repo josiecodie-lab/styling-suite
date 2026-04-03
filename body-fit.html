@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Body & Fit · The Styling Suite</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cream:#F8F4EF;--linen:#EDE8E0;--stone:#C9C2B6;--dusk:#8C8379;
+  --charcoal:#2E2A26;--ink:#1A1714;--blush:#E8C4BB;--rose:#C97B7B;
+  --gold:#C4A45A;--sage:#8FAF96;
+  --serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost',sans-serif;
+}
+html,body{background:var(--cream);color:var(--ink);font-family:var(--sans);font-weight:300;-webkit-font-smoothing:antialiased}
+.page{max-width:480px;margin:0 auto;min-height:100vh;padding-bottom:56px}
+.topbar{padding:24px 24px 0;display:flex;justify-content:space-between;align-items:center}
+.back{font-size:11px;letter-spacing:.08em;color:var(--dusk);text-decoration:none}
+.back:hover{color:var(--charcoal)}
+.toplabel{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--stone)}
+.hero{padding:28px 24px 16px}
+.eyebrow{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--dusk);margin-bottom:8px}
+.htitle{font-family:var(--serif);font-size:34px;font-weight:300;line-height:1.1;margin-bottom:10px}
+.htitle em{font-style:italic}
+.hsub{font-size:12px;color:var(--dusk);line-height:1.7}
+.deco{margin:14px 24px;display:flex;align-items:center;gap:10px}
+.deco hr{flex:1;border:none;border-top:.5px solid var(--stone)}
+.deco span{width:4px;height:4px;background:var(--stone);transform:rotate(45deg);flex-shrink:0}
+.card{background:#fff;border:.5px solid var(--linen);border-radius:14px;padding:18px;margin:10px 24px 0}
+.ql{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--dusk);margin-bottom:5px}
+.qt{font-family:var(--serif);font-size:18px;font-weight:300;color:var(--ink);margin-bottom:12px;line-height:1.3}
+.qhint{font-size:11px;color:var(--stone);margin-bottom:12px;line-height:1.6;font-style:italic}
+
+/* body shape cards */
+.shape-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.shape-card{border:.5px solid var(--linen);border-radius:12px;padding:12px 8px;text-align:center;cursor:pointer;transition:all .2s;background:var(--cream)}
+.shape-card:hover{border-color:var(--stone)}
+.shape-card.sel{border-color:var(--blush);border-width:1.5px;background:#FDF5F2}
+.shape-card svg{width:50px;height:80px;display:block;margin:0 auto 8px}
+.shape-name{font-family:var(--serif);font-size:13px;color:var(--ink);margin-bottom:2px}
+.shape-desc{font-size:9px;color:var(--dusk);line-height:1.4;letter-spacing:.03em}
+.shape-card.sel .shape-name{color:var(--rose)}
+
+/* chips */
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:11px;padding:6px 13px;border-radius:40px;border:.5px solid var(--stone);color:var(--dusk);cursor:pointer;transition:all .18s;user-select:none}
+.chip:hover{border-color:var(--charcoal);color:var(--charcoal)}
+.chip.sel{background:var(--charcoal);color:#fff;border-color:var(--charcoal)}
+
+/* single select */
+.slist{display:flex;flex-direction:column;gap:7px}
+.sopt{border:.5px solid var(--linen);border-radius:10px;padding:11px 14px;cursor:pointer;font-size:12px;color:var(--charcoal);background:var(--cream);transition:all .18s;line-height:1.5}
+.sopt:hover{border-color:var(--stone)}
+.sopt.sel{border-color:var(--blush);background:#FDF5F2;color:var(--rose)}
+
+.cta{padding:14px 24px;display:flex;gap:10px}
+.btnp{flex:1;padding:13px;font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase;background:var(--charcoal);color:#fff;border:none;border-radius:10px;cursor:pointer;transition:all .2s}
+.btnp:hover{background:var(--ink)}
+.btnp:disabled{background:var(--stone);cursor:default}
+.btng{padding:13px 16px;font-family:var(--sans);font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:transparent;color:var(--dusk);border:.5px solid var(--stone);border-radius:10px;cursor:pointer}
+.btng:hover{color:var(--charcoal);border-color:var(--charcoal)}
+
+.loading{display:flex;flex-direction:column;align-items:center;padding:56px 24px;gap:16px;text-align:center}
+.ring{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--linen);border-top-color:var(--rose);animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ltxt{font-family:var(--serif);font-size:17px;font-style:italic;color:var(--dusk)}
+
+.rwrap{padding:0 24px 32px;animation:fadeup .5s ease}
+@keyframes fadeup{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+.rbadge{display:inline-block;font-size:9px;letter-spacing:.18em;text-transform:uppercase;padding:4px 14px;border-radius:40px;background:var(--linen);color:var(--dusk);margin-bottom:8px}
+.rtitle{font-family:var(--serif);font-size:30px;font-weight:300;color:var(--ink);margin-bottom:4px;line-height:1.1}
+.rtitle em{font-style:italic}
+.rtagline{font-size:12px;color:var(--dusk);margin-bottom:18px;line-height:1.65}
+
+/* body banner with illustration */
+.body-banner{border-radius:14px;padding:20px;margin-bottom:14px;display:flex;align-items:center;gap:20px}
+.banner-sil{width:60px;flex-shrink:0}
+.banner-info{flex:1}
+.banner-shape{font-family:var(--serif);font-size:22px;font-style:italic;margin-bottom:4px}
+.banner-goal{font-size:11px;line-height:1.6;opacity:.85}
+
+.rcard{background:#fff;border:.5px solid var(--linen);border-radius:14px;padding:16px;margin-bottom:10px}
+.rlbl{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--dusk);margin-bottom:10px}
+
+.nbar{border-left:2px solid var(--blush);padding-left:14px;margin-bottom:14px}
+.nlbl{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);margin-bottom:4px}
+.nbody{font-family:var(--serif);font-size:15px;font-style:italic;color:var(--charcoal);line-height:1.75;font-weight:300}
+.nbody.plain{font-style:normal;font-size:13px;line-height:1.65}
+
+/* wear/avoid rows */
+.wear-row{display:flex;flex-direction:column;gap:8px;margin-bottom:0}
+.wear-item{display:flex;gap:10px;align-items:flex-start;font-size:12px;color:var(--charcoal);line-height:1.5;padding:8px 10px;background:var(--cream);border-radius:8px}
+.wear-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.dot-yes{background:#8FAF96}
+.dot-no{background:#C97B7B}
+
+/* section split */
+.split-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:0}
+.split-card{background:var(--cream);border:.5px solid var(--linen);border-radius:10px;padding:12px}
+.split-title{font-size:9px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+.split-good{color:#4A7040}
+.split-avoid{color:#9B4040}
+.split-body{font-size:11px;color:var(--charcoal);line-height:1.65}
+
+/* pills */
+.pill-row{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:0}
+.pill{font-size:10px;padding:4px 11px;border-radius:40px}
+.pill-good{background:#EEF4EC;color:#3A6030}
+.pill-avoid{background:#FAECEC;color:#8A3030}
+
+/* anthro */
+.anthro-section{background:#FDF5F2;border:.5px solid var(--blush);border-radius:14px;padding:16px;margin-bottom:10px}
+.anthro-title{font-family:var(--serif);font-size:16px;color:var(--ink);margin-bottom:4px}
+.anthro-sub{font-size:11px;color:var(--dusk);margin-bottom:12px;line-height:1.6}
+.alinks{display:flex;flex-direction:column;gap:7px}
+.alink{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;background:#fff;border:.5px solid var(--linen);border-radius:10px;text-decoration:none;transition:all .2s}
+.alink:hover{border-color:var(--stone)}
+.alink-txt{font-size:12px;color:var(--charcoal)}
+.alink-arr{font-size:12px;color:var(--stone)}
+
+.divider{border:none;border-top:.5px solid var(--linen);margin:14px 0}
+.restart{display:block;width:100%;margin-top:12px;padding:12px;font-family:var(--sans);font-size:10px;letter-spacing:.14em;text-transform:uppercase;background:transparent;color:var(--stone);border:.5px solid var(--linen);border-radius:10px;cursor:pointer}
+.restart:hover{color:var(--charcoal);border-color:var(--stone)}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="topbar">
+  <a class="back" href="index.html">← Back</a>
+  <span class="toplabel">Body & Fit</span>
+</div>
+
+<!-- S1: Find your shape -->
+<div id="s1">
+  <div class="hero">
+    <div class="eyebrow">Step 1 of 3</div>
+    <h1 class="htitle">Find your<br><em>shape</em></h1>
+    <p class="hsub">Think about proportions — the relationship between your shoulders, waist, and hips. Not your size. Every shape is beautiful.</p>
+  </div>
+  <div class="deco"><hr><span></span><hr></div>
+  <div class="card">
+    <div class="ql">Your natural silhouette</div>
+    <div class="qt">Which best describes your proportions?</div>
+    <div class="shape-grid" id="shape-g">
+
+      <div class="shape-card" data-v="hourglass" onclick="selShape(this)">
+        <svg viewBox="0 0 50 80" fill="none">
+          <ellipse cx="25" cy="10" rx="14" ry="8" fill="#C9C2B6"/>
+          <path d="M11 18 Q8 32 15 40 Q8 48 11 62 Q18 72 25 74 Q32 72 39 62 Q42 48 35 40 Q42 32 39 18Z" fill="#C9C2B6"/>
+        </svg>
+        <div class="shape-name">Hourglass</div>
+        <div class="shape-desc">Balanced bust & hips · defined waist</div>
+      </div>
+
+      <div class="shape-card" data-v="pear" onclick="selShape(this)">
+        <svg viewBox="0 0 50 80" fill="none">
+          <ellipse cx="25" cy="10" rx="10" ry="7" fill="#C9C2B6"/>
+          <path d="M15 17 Q12 28 13 36 Q14 44 8 58 Q12 72 25 74 Q38 72 42 58 Q36 44 37 36 Q38 28 35 17Z" fill="#C9C2B6"/>
+        </svg>
+        <div class="shape-name">Pear</div>
+        <div class="shape-desc">Hips wider than shoulders · defined waist</div>
+      </div>
+
+      <div class="shape-card" data-v="apple" onclick="selShape(this)">
+        <svg viewBox="0 0 50 80" fill="none">
+          <ellipse cx="25" cy="10" rx="12" ry="7" fill="#C9C2B6"/>
+          <path d="M13 17 Q8 28 10 40 Q8 52 12 64 Q18 74 25 74 Q32 74 38 64 Q42 52 40 40 Q42 28 37 17Z" fill="#C9C2B6"/>
+        </svg>
+        <div class="shape-name">Apple</div>
+        <div class="shape-desc">Fuller midsection · slimmer legs</div>
+      </div>
+
+      <div class="shape-card" data-v="rectangle" onclick="selShape(this)">
+        <svg viewBox="0 0 50 80" fill="none">
+          <ellipse cx="25" cy="10" rx="12" ry="7" fill="#C9C2B6"/>
+          <path d="M13 17 Q12 30 12 44 L12 68 Q18 74 25 74 Q32 74 38 68 L38 44 Q38 30 37 17Z" fill="#C9C2B6"/>
+        </svg>
+        <div class="shape-name">Rectangle</div>
+        <div class="shape-desc">Similar width throughout · athletic</div>
+      </div>
+
+      <div class="shape-card" data-v="inverted triangle" onclick="selShape(this)">
+        <svg viewBox="0 0 50 80" fill="none">
+          <ellipse cx="25" cy="10" rx="16" ry="8" fill="#C9C2B6"/>
+          <path d="M9 18 Q8 30 12 42 Q16 56 18 68 Q21 74 25 74 Q29 74 32 68 Q34 56 38 42 Q42 30 41 18Z" fill="#C9C2B6"/>
+        </svg>
+        <div class="shape-name">Inverted triangle</div>
+        <div class="shape-desc">Broad shoulders · narrower hips</div>
+      </div>
+
+      <div class="shape-card" data-v="petite" onclick="selShape(this)">
+        <svg viewBox="0 0 50 80" fill="none">
+          <ellipse cx="25" cy="14" rx="10" ry="7" fill="#C9C2B6"/>
+          <path d="M15 21 Q12 30 13 38 Q12 46 15 56 Q19 64 25 66 Q31 64 35 56 Q38 46 37 38 Q38 30 35 21Z" fill="#C9C2B6"/>
+        </svg>
+        <div class="shape-name">Petite</div>
+        <div class="shape-desc">Shorter frame · under 5'4"</div>
+      </div>
+
+      <div class="shape-card" data-v="tall" onclick="selShape(this)">
+        <svg viewBox="0 0 50 80" fill="none">
+          <ellipse cx="25" cy="6" rx="11" ry="5" fill="#C9C2B6"/>
+          <path d="M14 11 Q12 22 13 34 Q13 46 14 60 L14 76 Q19 78 25 78 Q31 78 36 76 L36 60 Q37 46 37 34 Q38 22 36 11Z" fill="#C9C2B6"/>
+        </svg>
+        <div class="shape-name">Tall</div>
+        <div class="shape-desc">5'8" and above · long proportions</div>
+      </div>
+
+      <div class="shape-card" data-v="plus" onclick="selShape(this)">
+        <svg viewBox="0 0 50 80" fill="none">
+          <ellipse cx="25" cy="10" rx="14" ry="8" fill="#C9C2B6"/>
+          <path d="M11 18 Q6 30 8 44 Q6 58 10 68 Q17 76 25 76 Q33 76 40 68 Q44 58 42 44 Q44 30 39 18Z" fill="#C9C2B6"/>
+        </svg>
+        <div class="shape-name">Plus / curvy</div>
+        <div class="shape-desc">Fuller curves · generous proportions</div>
+      </div>
+
+    </div>
+  </div>
+  <div class="cta"><button class="btnp" id="n1" onclick="go('s2')" disabled>Next</button></div>
+</div>
+
+<!-- S2: Goals -->
+<div id="s2" style="display:none">
+  <div class="hero">
+    <div class="eyebrow">Step 2 of 3</div>
+    <h1 class="htitle">What you<br><em>love</em></h1>
+    <p class="hsub">Styling is about celebrating what you love — not hiding anything. Tell us what you want to highlight.</p>
+  </div>
+  <div class="deco"><hr><span></span><hr></div>
+  <div class="card">
+    <div class="ql">What you want to highlight</div>
+    <div class="qt">What are your favorite features?</div>
+    <div class="chips" id="highlight-c">
+      <div class="chip" data-v="waist" onclick="mc(this,'highlight')">My waist</div>
+      <div class="chip" data-v="legs" onclick="mc(this,'highlight')">My legs</div>
+      <div class="chip" data-v="shoulders" onclick="mc(this,'highlight')">My shoulders</div>
+      <div class="chip" data-v="bust" onclick="mc(this,'highlight')">My bust</div>
+      <div class="chip" data-v="back" onclick="mc(this,'highlight')">My back</div>
+      <div class="chip" data-v="arms" onclick="mc(this,'highlight')">My arms</div>
+      <div class="chip" data-v="curves" onclick="mc(this,'highlight')">My curves</div>
+      <div class="chip" data-v="height" onclick="mc(this,'highlight')">My height</div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:10px">
+    <div class="ql">Fit preference</div>
+    <div class="qt">How do you like your clothes to feel?</div>
+    <div class="slist" id="fit-l">
+      <div class="sopt" data-v="fitted and close" onclick="ss(this,'fit')">Fitted — I like clothes that follow my shape</div>
+      <div class="sopt" data-v="relaxed and flowy" onclick="ss(this,'fit')">Relaxed — I love movement and ease</div>
+      <div class="sopt" data-v="structured and tailored" onclick="ss(this,'fit')">Structured — I want clean lines and sharp fit</div>
+      <div class="sopt" data-v="mixed — fitted top relaxed bottom" onclick="ss(this,'fit')">Mixed — fitted on top, relaxed on the bottom</div>
+    </div>
+  </div>
+  <div class="cta"><button class="btng" onclick="go('s1')">Back</button><button class="btnp" id="n2" onclick="go('s3')" disabled>Next</button></div>
+</div>
+
+<!-- S3: Shopping struggles -->
+<div id="s3" style="display:none">
+  <div class="hero">
+    <div class="eyebrow">Step 3 of 3</div>
+    <h1 class="htitle">Your fit<br><em>frustrations</em></h1>
+    <p class="hsub">This is the most useful question. What drives you crazy when shopping? This tells us exactly where to focus.</p>
+  </div>
+  <div class="deco"><hr><span></span><hr></div>
+  <div class="card">
+    <div class="ql">Fit frustrations</div>
+    <div class="qt">What fit challenges do you run into most?</div>
+    <div class="chips" id="frustration-c">
+      <div class="chip" data-v="waistbands gap or are too big" onclick="mc(this,'frustration')">Waistbands always gap</div>
+      <div class="chip" data-v="shoulders are too wide for my size" onclick="mc(this,'frustration')">Shoulders too wide</div>
+      <div class="chip" data-v="hips too wide for the waist size" onclick="mc(this,'frustration')">Hips vs waist sizing</div>
+      <div class="chip" data-v="tops are boxy and hide my shape" onclick="mc(this,'frustration')">Tops hide my shape</div>
+      <div class="chip" data-v="dresses pull across the bust" onclick="mc(this,'frustration')">Pulls across bust</div>
+      <div class="chip" data-v="everything is too long" onclick="mc(this,'frustration')">Everything too long</div>
+      <div class="chip" data-v="nothing fits both hips and waist" onclick="mc(this,'frustration')">Nothing fits both</div>
+      <div class="chip" data-v="trousers bag in the seat" onclick="mc(this,'frustration')">Trousers bag in seat</div>
+      <div class="chip" data-v="arms are too tight in sleeves" onclick="mc(this,'frustration')">Tight sleeves</div>
+      <div class="chip" data-v="midsection fit" onclick="mc(this,'frustration')">Midsection fit</div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:10px">
+    <div class="ql">Your priority</div>
+    <div class="qt">What matters most to you when getting dressed?</div>
+    <div class="slist" id="priority-l">
+      <div class="sopt" data-v="looking balanced and proportional" onclick="ss(this,'priority')">Looking balanced and proportional</div>
+      <div class="sopt" data-v="highlighting my best features" onclick="ss(this,'priority')">Highlighting my best features</div>
+      <div class="sopt" data-v="feeling comfortable and confident" onclick="ss(this,'priority')">Feeling comfortable and confident</div>
+      <div class="sopt" data-v="looking taller and more elongated" onclick="ss(this,'priority')">Looking taller and more elongated</div>
+      <div class="sopt" data-v="defining my waist" onclick="ss(this,'priority')">Defining and creating a waist</div>
+    </div>
+  </div>
+  <div class="cta"><button class="btng" onclick="go('s2')">Back</button><button class="btnp" id="n3" onclick="analyze()" disabled>Get my guide</button></div>
+</div>
+
+<!-- LOADING -->
+<div id="loading" style="display:none">
+  <div class="loading"><div class="ring"></div><p class="ltxt" id="lmsg">Building your fit guide...</p></div>
+</div>
+
+<!-- RESULT -->
+<div id="result" style="display:none">
+  <div class="rwrap" id="result-inner" style="margin-top:20px"></div>
+</div>
+
+</div>
+
+<script>
+const API_KEY = 'YOUR_API_KEY_HERE';
+const S = {shape:null, highlight:[], fit:null, frustration:[], priority:null};
+
+// ── Full body shape database ──
+const SHAPES = {
+  hourglass:{
+    tagline:'Your shape is naturally balanced — the goal is to follow your curves, not fight them.',
+    goal:'Accentuate your defined waist · keep proportions balanced · let the shape do the work',
+    bannerBg:'linear-gradient(135deg,#C9A0A8,#D4B8C0)',
+    stylistNote:'You have the most versatile of all body shapes — almost everything works on you when it fits well. Your waist is your superpower. Use it.',
+    principle:'Follow the natural body line. Clothes that hug at the waist and flow over curves will always be your best friend.',
+    wear:[
+      'Wrap dresses and tops — they follow your curves beautifully',
+      'Belted anything — cinching the waist emphasizes your best feature',
+      'Fit-and-flare silhouettes — fitted bodice, full skirt',
+      'High-waisted skirts and trousers that sit at your narrowest point',
+      'V-neck and scoop necklines — balanced and flattering',
+      'Form-fitting knits and lightweight fabrics that move with you',
+      'A-line and midi skirts — both work perfectly for your shape'
+    ],
+    avoid:[
+      'Boxy, shapeless tops that hide your waist entirely',
+      'Straight-cut shift dresses that ignore your curves',
+      'Oversized everything from head to toe — loses your silhouette',
+      'Double-breasted jackets or heavy embellishment at the hips'
+    ],
+    tops:['Wrap tops','V-neck blouses','Fitted knits','Peplum tops','Corset-style bodices'],
+    bottoms:['High-waisted trousers','A-line midi skirts','Flare-leg jeans','Fitted pencil skirts'],
+    dresses:['Wrap dresses','Fit-and-flare','Belted midis','Bodycon with structure'],
+    necklines:['V-neck','Scoop','Sweetheart','Square neck'],
+    anthroLinks:[
+      {label:'Shop wrap & belted dresses at Anthropologie',url:'https://www.anthropologie.com/dresses'},
+      {label:'Shop A-line midi skirts',url:'https://www.anthropologie.com/clothing?feature=skirts'},
+      {label:'Shop high-waisted trousers',url:'https://www.anthropologie.com/clothing?feature=pants'}
+    ]
+  },
+  pear:{
+    tagline:'Your hips and defined waist are your greatest assets — let\'s draw all the attention upward.',
+    goal:'Add volume and interest to the upper body · define the waist · let the lower half breathe',
+    bannerBg:'linear-gradient(135deg,#B0A8C4,#9890B4)',
+    stylistNote:'The secret to dressing a pear shape is not hiding your hips — it\'s balancing them by creating presence on top. Bold shoulders, statement necklines, and eye-catching tops are your best friends.',
+    principle:'Create visual balance by drawing the eye upward. Darker, simpler bottoms paired with detailed, brighter, or structured tops create perfect harmony.',
+    wear:[
+      'Structured shoulders and statement sleeves — puff, flutter, bell — to broaden the upper half',
+      'Bright or patterned tops paired with dark, simple bottoms',
+      'A-line skirts and dresses — they skim over hips without clinging',
+      'Wide-leg trousers and bootcut jeans — they balance the hip line',
+      'Off-the-shoulder and boat necklines to add width up top',
+      'Wrap dresses — they define the waist and flow over the hips',
+      'Embellished necklaces to draw the eye to your face and chest'
+    ],
+    avoid:[
+      'Skinny jeans or leggings with a simple tight top — draws all eye downward',
+      'Dropped waists or low-rise bottoms — adds visual weight to hips',
+      'Heavily embellished pockets or prints on the hips and thighs',
+      'Pencil skirts in bold colors or busy prints',
+      'Cropped jackets that end exactly at the widest part of the hip'
+    ],
+    tops:['Puff sleeve blouses','Off-the-shoulder tops','Embellished necklines','Bold print tops','Structured blazers'],
+    bottoms:['A-line midi skirts','Wide-leg trousers','Dark straight-leg jeans','Bootcut denim'],
+    dresses:['A-line midi dresses','Wrap dresses','Empire waist styles','Fit-and-flare'],
+    necklines:['Off-the-shoulder','Boat neck','Square','Wide V-neck'],
+    anthroLinks:[
+      {label:'Shop A-line dresses at Anthropologie',url:'https://www.anthropologie.com/dresses'},
+      {label:'Shop statement tops & blouses',url:'https://www.anthropologie.com/clothing?feature=tops'},
+      {label:'Shop wide-leg trousers',url:'https://www.anthropologie.com/clothing?feature=pants'}
+    ]
+  },
+  apple:{
+    tagline:'Your legs, bust, and décolletage are stunning — let\'s put the focus right there.',
+    goal:'Elongate the midsection · highlight bust and legs · create a long vertical line',
+    bannerBg:'linear-gradient(135deg,#C4A870,#B09060)',
+    stylistNote:'The key for an apple shape is not to hide the middle — it\'s to redirect attention to your gorgeous legs, chest, and arms. Empire waists, V-necks, and flowing fabrics are transformative.',
+    principle:'Create a vertical line through the center of the body. V-necks, open-front layers, and flowy fabrics that skim (not cling) to the midsection are your formula.',
+    wear:[
+      'V-necks and deep scoop necklines — they draw the eye down and create length',
+      'Empire waist dresses — fitted under the bust, flowing over the midsection',
+      'Open-front cardigans and jackets worn open — create a long vertical line',
+      'Wrap dresses in flowing, lightweight fabric',
+      'Straight or slightly flared trousers to balance proportions',
+      'Dark tops and lighter, eye-catching bottoms to shift attention downward',
+      'Monochromatic dressing from top to toe — instantly elongating'
+    ],
+    avoid:[
+      'Tight waistbands or belts directly at the midsection',
+      'Boxy, crop tops that end at the waist',
+      'Horizontal stripes or bold patterns across the midsection',
+      'Clingy fabrics that highlight the midsection rather than skim it',
+      'Stiff, structured fabrics that add bulk'
+    ],
+    tops:['V-neck blouses','Empire-cut tops','Open-front layers','Flowy tunics','Wrap tops'],
+    bottoms:['Straight-leg jeans','A-line skirts','Flare trousers','High-waisted below the belly button'],
+    dresses:['Empire waist dresses','Wrap dresses','A-line midi','Shirt dresses'],
+    necklines:['V-neck','Deep scoop','Plunge','Open collar'],
+    anthroLinks:[
+      {label:'Shop wrap & empire waist dresses at Anthropologie',url:'https://www.anthropologie.com/dresses'},
+      {label:'Shop flowy and airy tops',url:'https://www.anthropologie.com/clothing?feature=tops'},
+      {label:'Shop Anthropologie new arrivals',url:'https://www.anthropologie.com/new-clothes'}
+    ]
+  },
+  rectangle:{
+    tagline:'You have a naturally athletic silhouette — the goal is to create curves and waist definition where you want them.',
+    goal:'Create the illusion of curves · define the waist · add dimension and interest',
+    bannerBg:'linear-gradient(135deg,#9898A8,#7878A0)',
+    stylistNote:'Your straight silhouette is incredibly versatile — you can wear things that curvier shapes can\'t. The trick is using details, volume, and waist definition to add dimension exactly where you want it.',
+    principle:'Break up the straight line. Ruffles, tiers, peplums, and anything that adds volume at the bust or hips — combined with waist-defining details — create beautiful dimension.',
+    wear:[
+      'Peplum tops and dresses — they add instant curves at the hip',
+      'Belts and waist-cinching details even if the waist isn\'t naturally defined',
+      'Tiered and ruffled skirts — they add volume and feminine shape',
+      'Wrap dresses — the tie creates a waist where there isn\'t one',
+      'Bootcut and flare jeans — they add width at the hem and create curves',
+      'Off-shoulder styles and puff sleeves — they add volume and visual interest',
+      'Bold prints and textures — you can carry patterns that overwhelm curvier shapes'
+    ],
+    avoid:[
+      'Shapeless, boxy silhouettes with no waist definition at all',
+      'Long, straight column dresses in simple fabrics — they emphasize the straight line',
+      'Dropped waists that remove what little definition you have'
+    ],
+    tops:['Peplum tops','Off-shoulder blouses','Wrap styles','Ruffled or textured tops','Cropped with high-waisted bottoms'],
+    bottoms:['Tiered midi skirts','Flare-leg trousers','Bootcut jeans','Full A-line skirts','Circle skirts'],
+    dresses:['Wrap dresses','Fit-and-flare','Peplum dresses','Tiered midis','Ruched styles'],
+    necklines:['Off-the-shoulder','Sweetheart','Halter','V-neck','Square neck'],
+    anthroLinks:[
+      {label:'Shop tiered & flowy dresses at Anthropologie',url:'https://www.anthropologie.com/dresses'},
+      {label:'Shop wrap and peplum styles',url:'https://www.anthropologie.com/new-clothes'},
+      {label:'Shop Maeve collection',url:'https://www.anthropologie.com/shop-maeve'}
+    ]
+  },
+  'inverted triangle':{
+    tagline:'Your strong shoulders are striking — the goal is to balance them with volume and interest below the waist.',
+    goal:'Add volume to the lower body · soften the shoulders · create a balanced silhouette',
+    bannerBg:'linear-gradient(135deg,#7888A8,#6070A0)',
+    stylistNote:'Your broad shoulders and narrower hips create a powerful, athletic look. The key is adding visual weight below the waist to create balance — think full skirts, wide-leg trousers, and bold bottoms.',
+    principle:'What goes up must be balanced. Simple, dark, or solid tops combined with voluminous, patterned, or detailed bottoms bring everything into proportion.',
+    wear:[
+      'Wide-leg trousers and flare jeans — they add width at the hip and balance the shoulders',
+      'A-line and full skirts — they create volume right where you need it',
+      'V-necks and U-necks — they draw the eye inward and narrow the shoulder appearance',
+      'Wrap tops — they define the waist and soften the shoulder line',
+      'Bold prints, patterns, and embellishments on the bottom half only',
+      'Lighter colors on the bottom and darker tones on top',
+      'Dropped shoulder styles and raglan sleeves that soften the shoulder line'
+    ],
+    avoid:[
+      'Off-the-shoulder, boat neck, and wide necklines that add more width to the shoulders',
+      'Puff sleeves, shoulder pads, or any top detail that widens the shoulder',
+      'Skinny jeans and fitted trousers in dark colors that minimize the lower body further',
+      'Bold colors or prints on top paired with dark, simple bottoms',
+      'Strapless tops that broaden the shoulder line'
+    ],
+    tops:['Simple V-neck blouses','Wrap tops','Soft draping fabrics','Raglan and dolman sleeves','Simple fitted tees'],
+    bottoms:['Wide-leg trousers','A-line skirts','Full midi skirts','Printed or embellished bottoms'],
+    dresses:['Wrap dresses','A-line silhouettes','Drop-waist styles','Column dresses'],
+    necklines:['V-neck','Wrap','U-neck','Plunge'],
+    anthroLinks:[
+      {label:'Shop wide-leg & flare pants at Anthropologie',url:'https://www.anthropologie.com/clothing?feature=pants'},
+      {label:'Shop A-line and full skirts',url:'https://www.anthropologie.com/clothing?feature=skirts'},
+      {label:'Shop wrap dresses',url:'https://www.anthropologie.com/dresses'}
+    ]
+  },
+  petite:{
+    tagline:'Your frame is perfectly proportioned — the goal is to elongate and let every inch work beautifully for you.',
+    goal:'Elongate the silhouette · avoid overwhelming your frame · create vertical lines',
+    bannerBg:'linear-gradient(135deg,#B8A8C4,#A898B8)',
+    stylistNote:'Everything is about proportion for a petite frame. The right hem length, vertical details, and monochromatic dressing can make you look inches taller and perfectly pulled together.',
+    principle:'Create length. Vertical lines, monochromatic outfits, high-waisted bottoms, and the right hem length (just above or below the knee) are transformative for petite frames.',
+    wear:[
+      'High-waisted bottoms that make legs appear longer',
+      'Monochromatic outfits from top to toe — they create an unbroken vertical line',
+      'Vertical stripes, pinstripes, and linear details',
+      'Hem lengths that hit just above or just below the knee — both are more elongating than mid-calf',
+      'Cropped jackets that end at the waist — longer jackets overwhelm a petite frame',
+      'V-necks and vertical neckline details that create length',
+      'Fitted or semi-fitted silhouettes — too much volume overwhelms your frame'
+    ],
+    avoid:[
+      'Mid-calf or ankle-grazing hemlines that visually cut the leg in half',
+      'Oversized, voluminous clothing head-to-toe that swamps your frame',
+      'Heavy horizontal patterns or wide stripes that add visual width',
+      'Long, oversized jackets and coats that end past the hip',
+      'Wide belts that cut the body and make you appear shorter'
+    ],
+    tops:['Cropped tops with high-waisted bottoms','Fitted v-necks','Vertical detail tops','Simple fitted knits'],
+    bottoms:['High-waisted trousers','Straight-leg or slim-fit jeans','Midi skirts with V-hem','Mini skirts'],
+    dresses:['Above-knee or midi length','Column and sheath styles','Wrap dresses','High-waisted fit-and-flare'],
+    necklines:['V-neck','Halter','Plunge','Open collar'],
+    anthroLinks:[
+      {label:'Shop petite-friendly styles at Anthropologie',url:'https://www.anthropologie.com/dresses'},
+      {label:'Shop high-waisted bottoms',url:'https://www.anthropologie.com/clothing?feature=pants'},
+      {label:'Shop Maeve — great petite-proportioned pieces',url:'https://www.anthropologie.com/shop-maeve'}
+    ]
+  },
+  tall:{
+    tagline:'Your height is your most striking feature — the goal is to own it and use every inch.',
+    goal:'Fill out the silhouette · use bold lengths and volume · proportions work in your favor',
+    bannerBg:'linear-gradient(135deg,#8090A8,#607090)',
+    stylistNote:'You can wear lengths, volumes, and details that shorter frames can\'t touch. Maxi lengths, wide-leg trousers, and dramatic sleeves were made for your proportions. Lean into every inch.',
+    principle:'You have the freedom to experiment. Maxi lengths land correctly, wide-leg trousers look intentional, and bold prints don\'t overwhelm you — they land exactly right.',
+    wear:[
+      'Maxi dresses and floor-length skirts — they hit your proportions perfectly',
+      'Wide-leg and palazzo trousers — they look intentional, not overwhelming',
+      'Midi and maxi hemlines that most bodies struggle to pull off',
+      'Horizontal stripes and bold prints — your height carries them beautifully',
+      'Oversized and dramatic silhouettes — volume doesn\'t overwhelm you',
+      'Long, floor-grazing coats and dusters',
+      'Bold sleeve details, ruffles, and volume — you have the frame for it'
+    ],
+    avoid:[
+      'Clothes that are consistently too short — proportions matter',
+      'Hemlines that hit at awkward lengths like mid-calf when floor length is available',
+      'Micro-mini pieces exclusively — vary your lengths'
+    ],
+    tops:['Oversized blouses','Dramatic sleeve styles','Long tunics','Bold print tops','Fitted turtlenecks'],
+    bottoms:['Wide-leg trousers','Palazzo pants','Maxi skirts','Longline styles','Flares'],
+    dresses:['Maxi dresses','Long shirt dresses','Column gowns','Drama-sleeve midis'],
+    necklines:['Everything works · try turtlenecks','Boat neck','Crew neck','Bold statement necklines'],
+    anthroLinks:[
+      {label:'Shop maxi dresses at Anthropologie',url:'https://www.anthropologie.com/dresses?length=maxi'},
+      {label:'Shop wide-leg trousers',url:'https://www.anthropologie.com/clothing?feature=pants'},
+      {label:'Shop bold prints and statement pieces',url:'https://www.anthropologie.com/new-clothes'}
+    ]
+  },
+  plus:{
+    tagline:'Your curves are your signature — the goal is to dress in a way that makes you feel powerful and completely yourself.',
+    goal:'Celebrate curves · find perfect fit · highlight your best features with intention',
+    bannerBg:'linear-gradient(135deg,#C4A0A8,#B09098)',
+    stylistNote:'Fit is everything for plus and curvy frames — a well-fitting piece in any size always looks better than a larger size with no structure. Your curves deserve clothes made for them.',
+    principle:'Proportion and fit over size. Look for clothes designed with your curves in mind — wrap styles, stretch fabric with structure, and empire waists that celebrate your shape.',
+    wear:[
+      'Wrap dresses and tops — they adjust to your curves and always look polished',
+      'Empire waist styles — fitted at the bust, flowing below',
+      'Well-structured fabrics with some stretch — they hold shape without clinging',
+      'V-necks and open necklines — they elongate and open up the face',
+      'A-line silhouettes that celebrate curves without clinging',
+      'Monochromatic outfits that create an unbroken, elongating line',
+      'High-waisted bottoms that define the waist and smooth the midsection'
+    ],
+    avoid:[
+      'Clothes that are tight everywhere — fit matters more than size',
+      'Fabrics with no structure or give — they cling in the wrong places',
+      'Boxy styles that hide your shape entirely and add visual weight',
+      'Very tight waistbands that cut in and create discomfort'
+    ],
+    tops:['Wrap tops','V-neck blouses','Empire-line tops','Peplum styles','Structured stretch tops'],
+    bottoms:['High-waisted trousers','A-line skirts','Straight-leg jeans','Wide-leg with stretch'],
+    dresses:['Wrap dresses','A-line midis','Empire waist styles','Stretchy column dresses'],
+    necklines:['V-neck','Scoop','Wrap','Sweetheart'],
+    anthroLinks:[
+      {label:'Shop plus-size styles at Anthropologie',url:'https://www.anthropologie.com/plus-size-clothing'},
+      {label:'Shop wrap dresses for all sizes',url:'https://www.anthropologie.com/dresses'},
+      {label:'Shop Anthropologie extended sizes',url:'https://www.anthropologie.com/new-clothes'}
+    ]
+  }
+};
+
+// ── Body shape SVGs for results ──
+function silSVG(shape, color){
+  const c = color || '#C9C2B6';
+  const m = {
+    hourglass:`<svg viewBox="0 0 50 80" fill="none"><ellipse cx="25" cy="10" rx="14" ry="8" fill="${c}"/><path d="M11 18 Q8 32 15 40 Q8 48 11 62 Q18 72 25 74 Q32 72 39 62 Q42 48 35 40 Q42 32 39 18Z" fill="${c}"/></svg>`,
+    pear:`<svg viewBox="0 0 50 80" fill="none"><ellipse cx="25" cy="10" rx="10" ry="7" fill="${c}"/><path d="M15 17 Q12 28 13 36 Q14 44 8 58 Q12 72 25 74 Q38 72 42 58 Q36 44 37 36 Q38 28 35 17Z" fill="${c}"/></svg>`,
+    apple:`<svg viewBox="0 0 50 80" fill="none"><ellipse cx="25" cy="10" rx="12" ry="7" fill="${c}"/><path d="M13 17 Q8 28 10 40 Q8 52 12 64 Q18 74 25 74 Q32 74 38 64 Q42 52 40 40 Q42 28 37 17Z" fill="${c}"/></svg>`,
+    rectangle:`<svg viewBox="0 0 50 80" fill="none"><ellipse cx="25" cy="10" rx="12" ry="7" fill="${c}"/><path d="M13 17 Q12 30 12 44 L12 68 Q18 74 25 74 Q32 74 38 68 L38 44 Q38 30 37 17Z" fill="${c}"/></svg>`,
+    'inverted triangle':`<svg viewBox="0 0 50 80" fill="none"><ellipse cx="25" cy="10" rx="16" ry="8" fill="${c}"/><path d="M9 18 Q8 30 12 42 Q16 56 18 68 Q21 74 25 74 Q29 74 32 68 Q34 56 38 42 Q42 30 41 18Z" fill="${c}"/></svg>`,
+    petite:`<svg viewBox="0 0 50 80" fill="none"><ellipse cx="25" cy="14" rx="10" ry="7" fill="${c}"/><path d="M15 21 Q12 30 13 38 Q12 46 15 56 Q19 64 25 66 Q31 64 35 56 Q38 46 37 38 Q38 30 35 21Z" fill="${c}"/></svg>`,
+    tall:`<svg viewBox="0 0 50 80" fill="none"><ellipse cx="25" cy="6" rx="11" ry="5" fill="${c}"/><path d="M14 11 Q12 22 13 34 Q13 46 14 60 L14 76 Q19 78 25 78 Q31 78 36 76 L36 60 Q37 46 37 34 Q38 22 36 11Z" fill="${c}"/></svg>`,
+    plus:`<svg viewBox="0 0 50 80" fill="none"><ellipse cx="25" cy="10" rx="14" ry="8" fill="${c}"/><path d="M11 18 Q6 30 8 44 Q6 58 10 68 Q17 76 25 76 Q33 76 40 68 Q44 58 42 44 Q44 30 39 18Z" fill="${c}"/></svg>`
+  };
+  return m[shape] || m['hourglass'];
+}
+
+function selShape(el){document.querySelectorAll('.shape-card').forEach(c=>c.classList.remove('sel'));el.classList.add('sel');S.shape=el.dataset.v;document.getElementById('n1').disabled=false}
+function mc(el,k){el.classList.toggle('sel');const v=el.dataset.v;const i=S[k].indexOf(v);i>-1?S[k].splice(i,1):S[k].push(v);vld()}
+function ss(el,k){el.closest('.slist').querySelectorAll('.sopt').forEach(o=>o.classList.remove('sel'));el.classList.add('sel');S[k]=el.dataset.v;vld()}
+
+function vld(){
+  const ok2=S.highlight.length>0&&S.fit;
+  const ok3=S.priority;
+  const n2=document.getElementById('n2');const n3=document.getElementById('n3');
+  if(n2)n2.disabled=!ok2;if(n3)n3.disabled=!ok3;
+}
+
+function go(id){
+  ['s1','s2','s3','loading','result'].forEach(x=>{const el=document.getElementById(x);if(el)el.style.display=x===id?'':'none'});
+  window.scrollTo(0,0);
+}
+
+const MSGS=['Building your fit guide...','Researching your shape...','Putting together your tips...'];
+function cycleMsgs(el,msgs){let i=0;el.textContent=msgs[0];return setInterval(()=>{i=(i+1)%msgs.length;el.textContent=msgs[i];},2000)}
+
+async function analyze(){
+  go('loading');
+  const el=document.getElementById('lmsg');
+  const timer=cycleMsgs(el,MSGS);
+  const d=SHAPES[S.shape]||SHAPES['hourglass'];
+  let personalNote=d.stylistNote;
+
+  if(API_KEY&&API_KEY!=='YOUR_API_KEY_HERE'){
+    try{
+      const prompt=`You are a personal stylist. A client has body shape=${S.shape}, wants to highlight=${S.highlight.join(', ')}, fit preference=${S.fit}, fit frustrations=${S.frustration.join(', ')}, priority=${S.priority}. Write JSON: "personalNote" (2 warm specific sentences of styling advice addressing their actual frustrations and highlights — personal and practical). No preamble.`;
+      const resp=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':API_KEY,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:300,messages:[{role:'user',content:prompt}]})});
+      const data=await resp.json();
+      const txt=data.content.map(b=>b.text||'').join('').replace(/```json|```/g,'').trim();
+      const ai=JSON.parse(txt);
+      if(ai.personalNote)personalNote=ai.personalNote;
+    }catch(e){}
+  }
+
+  clearInterval(timer);
+  render(d,personalNote);
+}
+
+function render(d, personalNote){
+  const shapeName=S.shape.charAt(0).toUpperCase()+S.shape.slice(1);
+  const wearItems=d.wear.map(w=>`<div class="wear-item"><div class="wear-dot dot-yes"></div><div>${w}</div></div>`).join('');
+  const avoidItems=d.avoid.map(a=>`<div class="wear-item"><div class="wear-dot dot-no"></div><div>${a}</div></div>`).join('');
+  const topPills=d.tops.map(t=>`<span class="pill pill-good">${t}</span>`).join('');
+  const bottomPills=d.bottoms.map(b=>`<span class="pill pill-good">${b}</span>`).join('');
+  const dressPills=d.dresses.map(dr=>`<span class="pill pill-good">${dr}</span>`).join('');
+  const neckPills=d.necklines.map(n=>`<span class="pill pill-good">${n}</span>`).join('');
+
+  document.getElementById('result-inner').innerHTML=`
+    <div class="rbadge">Your body & fit guide</div>
+    <h2 class="rtitle"><em>${shapeName}</em></h2>
+    <p class="rtagline">${d.tagline}</p>
+
+    <div class="body-banner" style="background:${d.bannerBg}">
+      <div class="banner-sil">${silSVG(S.shape,'rgba(255,255,255,0.6)')}</div>
+      <div class="banner-info">
+        <div class="banner-shape" style="color:#fff">${shapeName}</div>
+        <div class="banner-goal" style="color:rgba(255,255,255,0.85)">${d.goal}</div>
+      </div>
+    </div>
+
+    <div class="nbar">
+      <div class="nlbl">Your stylist's note</div>
+      <div class="nbody">${personalNote}</div>
+    </div>
+
+    <div class="nbar">
+      <div class="nlbl">The principle</div>
+      <div class="nbody">${d.principle}</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="rcard">
+      <div class="rlbl">Wear these</div>
+      <div class="wear-row">${wearItems}</div>
+    </div>
+
+    <div class="rcard">
+      <div class="rlbl">Be mindful of</div>
+      <div class="wear-row">${avoidItems}</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="rcard">
+      <div class="rlbl">Best tops for you</div>
+      <div class="pill-row" style="margin-bottom:12px">${topPills}</div>
+      <div class="rlbl">Best bottoms</div>
+      <div class="pill-row" style="margin-bottom:12px">${bottomPills}</div>
+      <div class="rlbl">Best dress silhouettes</div>
+      <div class="pill-row" style="margin-bottom:12px">${dressPills}</div>
+      <div class="rlbl">Your best necklines</div>
+      <div class="pill-row">${neckPills}</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="anthro-section">
+      <div class="anthro-title">Shop for your shape at Anthropologie</div>
+      <div class="anthro-sub">Curated links to styles that work beautifully for your ${shapeName} frame.</div>
+      <div class="alinks">
+        ${d.anthroLinks.map(l=>`<a class="alink" href="${l.url}" target="_blank"><span class="alink-txt">${l.label}</span><span class="alink-arr">→</span></a>`).join('')}
+        <a class="alink" href="https://www.anthropologie.com/stories-style" target="_blank"><span class="alink-txt">Read Anthropologie style guides</span><span class="alink-arr">→</span></a>
+      </div>
+    </div>
+
+    <button class="restart" onclick="restart()">Start over</button>`;
+  go('result');
+}
+
+function restart(){
+  Object.keys(S).forEach(k=>S[k]=Array.isArray(S[k])?[]:null);
+  document.querySelectorAll('.shape-card,.chip,.sopt').forEach(el=>el.classList.remove('sel'));
+  go('s1');
+  document.getElementById('n1').disabled=true;
+  vld();
+}
+</script>
+</body>
+</html>
