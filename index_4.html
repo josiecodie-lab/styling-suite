@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>The Styling Suite</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --cream: #F8F4EF; --linen: #EDE8E0; --stone: #C9C2B6; --dusk: #8C8379;
+    --charcoal: #2E2A26; --ink: #1A1714; --blush: #E8C4BB;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Jost', sans-serif;
+  }
+  html, body { background: var(--cream); color: var(--ink); font-family: var(--sans); font-weight: 300; -webkit-font-smoothing: antialiased; }
+  .page { max-width: 480px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; padding: 0 0 48px; }
+
+  .topbar { padding: 28px 28px 0; display: flex; justify-content: space-between; align-items: center; }
+  .topbar-label { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--stone); }
+  .topbar-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--blush); animation: breathe 3s ease-in-out infinite; }
+  @keyframes breathe { 0%, 100% { opacity: 0.4; transform: scale(1); } 50% { opacity: 1; transform: scale(1.4); } }
+
+  .hero { padding: 48px 28px 36px; }
+  .hero-eyebrow { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dusk); margin-bottom: 14px; }
+  .hero-title { font-family: var(--serif); font-size: 46px; font-weight: 300; color: var(--ink); line-height: 1.08; margin-bottom: 20px; }
+  .hero-title em { font-style: italic; }
+  .hero-rule { width: 32px; height: 0.5px; background: var(--stone); margin-bottom: 16px; }
+  .hero-sub { font-size: 13px; color: var(--dusk); line-height: 1.75; max-width: 300px; }
+
+  .deco-line { margin: 12px 28px 24px; display: flex; align-items: center; gap: 12px; }
+  .deco-line-left { flex: 1; height: 0.5px; background: var(--stone); }
+  .deco-line-diamond { width: 5px; height: 5px; background: var(--stone); transform: rotate(45deg); flex-shrink: 0; }
+  .deco-line-right { flex: 1; height: 0.5px; background: var(--stone); }
+
+  .section-label { padding: 0 28px; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--stone); margin-bottom: 14px; }
+
+  .cards { padding: 0 28px; display: flex; flex-direction: column; gap: 10px; }
+
+  .card {
+    background: #fff; border: 0.5px solid var(--linen); border-radius: 14px;
+    padding: 20px 22px; display: flex; align-items: center; gap: 18px;
+    cursor: pointer; text-decoration: none; transition: all 0.22s ease;
+    position: relative; overflow: hidden;
+  }
+  .card::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px; background: var(--linen); transition: background 0.22s ease;
+  }
+  .card:hover { border-color: var(--stone); transform: translateY(-1px); }
+  .card:hover::before { background: var(--blush); }
+
+  .card-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .card-icon svg { width: 20px; height: 20px; }
+  .card-a .card-icon { background: #F5EEE9; }
+  .card-b .card-icon { background: #EEF0EC; }
+  .card-c .card-icon { background: #EEE9F0; }
+  .card-d .card-icon { background: #F5F0E8; }
+
+  .card-text { flex: 1; }
+  .card-name { font-family: var(--serif); font-size: 18px; font-weight: 400; color: var(--ink); margin-bottom: 3px; }
+  .card-desc { font-size: 11px; color: var(--dusk); letter-spacing: 0.03em; line-height: 1.5; }
+
+  .card-arrow { font-size: 15px; color: var(--stone); flex-shrink: 0; transition: transform 0.2s ease, color 0.2s ease; }
+  .card:hover .card-arrow { transform: translateX(3px); color: var(--charcoal); }
+
+  .footer { margin-top: 40px; padding: 0 28px; text-align: center; }
+  .footer-rule { height: 0.5px; background: var(--linen); margin-bottom: 20px; }
+  .footer-text { font-size: 10px; color: var(--stone); letter-spacing: 0.12em; text-transform: uppercase; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <span class="topbar-label">The Styling Suite</span>
+    <div class="topbar-dot"></div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-eyebrow">Your personal styling toolkit</div>
+    <h1 class="hero-title">Style starts<br>with <em>knowing</em><br>yourself.</h1>
+    <div class="hero-rule"></div>
+    <p class="hero-sub">A curated set of tools to help you discover your colors, your silhouette, and your style — all in one place.</p>
+  </div>
+
+  <div class="deco-line">
+    <div class="deco-line-left"></div>
+    <div class="deco-line-diamond"></div>
+    <div class="deco-line-right"></div>
+  </div>
+
+  <div class="section-label">Where would you like to begin?</div>
+  <div class="cards">
+
+    <a class="card card-a" href="color-season.html">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#B08898" stroke-width="1.2" stroke-linecap="round">
+          <circle cx="12" cy="12" r="5"/>
+          <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        </svg>
+      </div>
+      <div class="card-text">
+        <div class="card-name">Color Season</div>
+        <div class="card-desc">Discover your palette · undertones · what to wear</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <a class="card card-b" href="style-profile.html">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#8FAF96" stroke-width="1.2" stroke-linecap="round">
+          <path d="M12 21C12 21 4 14 4 9a8 8 0 0116 0c0 5-8 12-8 12z"/>
+          <circle cx="12" cy="9" r="2.5"/>
+        </svg>
+      </div>
+      <div class="card-text">
+        <div class="card-name">Style Profile</div>
+        <div class="card-desc">Define your aesthetic · your vibe · your signature look</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <a class="card card-c" href="body-fit.html">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#9B8FAF" stroke-width="1.2" stroke-linecap="round">
+          <path d="M12 3 L9 7 L9 19 L15 19 L15 7 Z"/>
+          <path d="M9 7 Q12 4.5 15 7"/>
+          <path d="M9 13 Q12 15.5 15 13"/>
+        </svg>
+      </div>
+      <div class="card-text">
+        <div class="card-name">Body & Fit</div>
+        <div class="card-desc">Silhouettes that flatter · cuts that work for you</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <a class="card card-d" href="bridal-suite.html">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#C4A45A" stroke-width="1.2" stroke-linecap="round">
+          <path d="M12 3 Q8 5 7 9 L5 21 L19 21 L17 9 Q16 5 12 3Z"/>
+          <path d="M9 9 Q12 7 15 9"/>
+        </svg>
+      </div>
+      <div class="card-text">
+        <div class="card-name">Bridal Suite</div>
+        <div class="card-desc">Gown finder · bridal style · your wedding look</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+  </div>
+
+  <div class="footer">
+    <div class="footer-rule"></div>
+    <div class="footer-text">Personal styling · Color · Wardrobe · Bridal</div>
+  </div>
+
+</div>
+</body>
+</html>
