@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Style Profile · The Styling Suite</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cream:#F8F4EF;--linen:#EDE8E0;--stone:#C9C2B6;--dusk:#8C8379;
+  --charcoal:#2E2A26;--ink:#1A1714;--blush:#E8C4BB;--rose:#C97B7B;
+  --gold:#C4A45A;--sage:#8FAF96;
+  --serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost',sans-serif;
+}
+html,body{background:var(--cream);color:var(--ink);font-family:var(--sans);font-weight:300;-webkit-font-smoothing:antialiased}
+.page{max-width:480px;margin:0 auto;min-height:100vh;padding-bottom:56px}
+.topbar{padding:24px 24px 0;display:flex;justify-content:space-between;align-items:center}
+.back{font-size:11px;letter-spacing:.08em;color:var(--dusk);text-decoration:none}
+.back:hover{color:var(--charcoal)}
+.toplabel{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--stone)}
+.hero{padding:28px 24px 16px}
+.eyebrow{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--dusk);margin-bottom:8px}
+.htitle{font-family:var(--serif);font-size:34px;font-weight:300;line-height:1.1;margin-bottom:10px}
+.htitle em{font-style:italic}
+.hsub{font-size:12px;color:var(--dusk);line-height:1.7}
+.deco{margin:14px 24px;display:flex;align-items:center;gap:10px}
+.deco hr{flex:1;border:none;border-top:.5px solid var(--stone)}
+.deco span{width:4px;height:4px;background:var(--stone);transform:rotate(45deg);flex-shrink:0}
+.card{background:#fff;border:.5px solid var(--linen);border-radius:14px;padding:18px;margin:10px 24px 0}
+.ql{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--dusk);margin-bottom:5px}
+.qt{font-family:var(--serif);font-size:18px;font-weight:300;color:var(--ink);margin-bottom:12px;line-height:1.3}
+.qhint{font-size:11px;color:var(--stone);margin-bottom:12px;line-height:1.6;font-style:italic}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:11px;padding:6px 13px;border-radius:40px;border:.5px solid var(--stone);color:var(--dusk);cursor:pointer;transition:all .18s;user-select:none}
+.chip:hover{border-color:var(--charcoal);color:var(--charcoal)}
+.chip.sel{background:var(--charcoal);color:#fff;border-color:var(--charcoal)}
+.slist{display:flex;flex-direction:column;gap:7px}
+.sopt{border:.5px solid var(--linen);border-radius:10px;padding:11px 14px;cursor:pointer;font-size:12px;color:var(--charcoal);background:var(--cream);transition:all .18s;line-height:1.5}
+.sopt:hover{border-color:var(--stone)}
+.sopt.sel{border-color:var(--blush);background:#FDF5F2;color:var(--rose)}
+
+/* image mood grid */
+.mood-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.mood-card{border:.5px solid var(--linen);border-radius:12px;overflow:hidden;cursor:pointer;transition:all .2s;background:var(--cream)}
+.mood-card.sel{border-color:var(--blush);border-width:1.5px}
+.mood-visual{height:80px;display:flex;align-items:center;justify-content:center;font-size:28px;position:relative;overflow:hidden}
+.mood-label{padding:8px 10px;font-size:11px;color:var(--charcoal);letter-spacing:.02em}
+.mood-sub{font-size:9px;color:var(--dusk);padding:0 10px 8px;line-height:1.4}
+.mood-card.sel .mood-label{color:var(--rose)}
+
+.cta{padding:14px 24px;display:flex;gap:10px}
+.btnp{flex:1;padding:13px;font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase;background:var(--charcoal);color:#fff;border:none;border-radius:10px;cursor:pointer;transition:all .2s}
+.btnp:hover{background:var(--ink)}
+.btnp:disabled{background:var(--stone);cursor:default}
+.btng{padding:13px 16px;font-family:var(--sans);font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:transparent;color:var(--dusk);border:.5px solid var(--stone);border-radius:10px;cursor:pointer}
+.btng:hover{color:var(--charcoal);border-color:var(--charcoal)}
+
+.loading{display:flex;flex-direction:column;align-items:center;padding:56px 24px;gap:16px;text-align:center}
+.ring{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--linen);border-top-color:var(--rose);animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ltxt{font-family:var(--serif);font-size:17px;font-style:italic;color:var(--dusk)}
+
+.rwrap{padding:0 24px 32px;animation:fadeup .5s ease}
+@keyframes fadeup{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* result header */
+.rbadge{display:inline-block;font-size:9px;letter-spacing:.18em;text-transform:uppercase;padding:4px 14px;border-radius:40px;background:var(--linen);color:var(--dusk);margin-bottom:8px}
+.rtitle{font-family:var(--serif);font-size:32px;font-weight:300;color:var(--ink);margin-bottom:4px;line-height:1.1}
+.rtitle em{font-style:italic}
+.rtagline{font-size:12px;color:var(--dusk);margin-bottom:18px;line-height:1.7}
+
+/* aesthetic visual banner */
+.aesthetic-banner{border-radius:14px;overflow:hidden;margin-bottom:14px;height:90px;display:flex;align-items:center;justify-content:flex-start;padding:0 20px;gap:14px}
+.banner-icon{font-size:32px;flex-shrink:0}
+.banner-text{flex:1}
+.banner-title{font-family:var(--serif);font-size:20px;color:#fff;font-style:italic;margin-bottom:2px}
+.banner-words{font-size:10px;color:rgba(255,255,255,0.75);letter-spacing:.1em;text-transform:uppercase}
+
+/* palette */
+.rcard{background:#fff;border:.5px solid var(--linen);border-radius:14px;padding:16px;margin-bottom:10px}
+.rlbl{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--dusk);margin-bottom:10px}
+.pal-row{display:flex;gap:6px;margin-bottom:8px}
+.pswatch{flex:1;height:48px;border-radius:8px}
+.pname{font-size:9px;color:var(--stone);text-align:center;margin-top:3px}
+
+/* nbar */
+.nbar{border-left:2px solid var(--blush);padding-left:14px;margin-bottom:14px}
+.nlbl{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);margin-bottom:4px}
+.nbody{font-family:var(--serif);font-size:15px;font-style:italic;color:var(--charcoal);line-height:1.75;font-weight:300}
+.nbody.plain{font-style:normal;font-size:13px;line-height:1.65}
+
+/* key items */
+.item-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.item-pill{font-size:11px;padding:5px 12px;border-radius:40px;background:var(--linen);color:var(--charcoal)}
+
+/* hair + makeup */
+.hm-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:0}
+.hm-card{background:var(--cream);border:.5px solid var(--linen);border-radius:10px;padding:12px}
+.hm-title{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--dusk);margin-bottom:6px}
+.hm-body{font-size:11px;color:var(--charcoal);line-height:1.6}
+
+/* secondary */
+.secondary-section{background:var(--linen);border-radius:12px;padding:14px;margin-bottom:10px}
+.sec-title{font-size:12px;color:var(--charcoal);margin-bottom:6px;font-family:var(--serif)}
+.sec-body{font-size:11px;color:var(--dusk);line-height:1.6}
+
+/* anthro */
+.anthro-section{background:#FDF5F2;border:.5px solid var(--blush);border-radius:14px;padding:16px;margin-bottom:10px}
+.anthro-title{font-family:var(--serif);font-size:16px;color:var(--ink);margin-bottom:4px}
+.anthro-sub{font-size:11px;color:var(--dusk);margin-bottom:12px;line-height:1.6}
+.alinks{display:flex;flex-direction:column;gap:7px}
+.alink{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;background:#fff;border:.5px solid var(--linen);border-radius:10px;text-decoration:none;transition:all .2s}
+.alink:hover{border-color:var(--stone)}
+.alink-txt{font-size:12px;color:var(--charcoal)}
+.alink-arr{font-size:12px;color:var(--stone)}
+
+.divider{border:none;border-top:.5px solid var(--linen);margin:14px 0}
+.restart{display:block;width:100%;margin-top:12px;padding:12px;font-family:var(--sans);font-size:10px;letter-spacing:.14em;text-transform:uppercase;background:transparent;color:var(--stone);border:.5px solid var(--linen);border-radius:10px;cursor:pointer}
+.restart:hover{color:var(--charcoal);border-color:var(--stone)}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="topbar">
+  <a class="back" href="index.html">← Back</a>
+  <span class="toplabel">Style Profile</span>
+</div>
+
+<!-- S1: Instincts -->
+<div id="s1">
+  <div class="hero">
+    <div class="eyebrow">Step 1 of 4</div>
+    <h1 class="htitle">Your style<br><em>instincts</em></h1>
+    <p class="hsub">Don't overthink. These first questions tap into your gut — what you're drawn to before logic kicks in.</p>
+  </div>
+  <div class="deco"><hr><span></span><hr></div>
+  <div class="card">
+    <div class="ql">If you could only wear one color family forever</div>
+    <div class="qt">Which palette feels most like home?</div>
+    <div class="slist" id="color-l">
+      <div class="sopt" data-v="neutrals" onclick="ss(this,'color')">Neutrals — black, white, grey, beige, cream</div>
+      <div class="sopt" data-v="earth" onclick="ss(this,'color')">Earth tones — rust, olive, camel, warm brown, terracotta</div>
+      <div class="sopt" data-v="pastels" onclick="ss(this,'color')">Pastels — blush, lavender, soft blue, dusty rose, mint</div>
+      <div class="sopt" data-v="jewel" onclick="ss(this,'color')">Jewel tones — deep emerald, burgundy, sapphire, plum</div>
+      <div class="sopt" data-v="bold" onclick="ss(this,'color')">Bold brights — red, cobalt, hot pink, electric blue</div>
+      <div class="sopt" data-v="monochrome" onclick="ss(this,'color')">All-black or all-white — true monochrome power</div>
+      <div class="sopt" data-v="mixed" onclick="ss(this,'color')">A mix of everything — pattern and color are my love language</div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:10px">
+    <div class="ql">Your morning routine</div>
+    <div class="qt">How do you decide what to wear?</div>
+    <div class="slist" id="morning-l">
+      <div class="sopt" data-v="effortless" onclick="ss(this,'morning')">I grab what's comfortable and easy — effortless is the goal</div>
+      <div class="sopt" data-v="planned" onclick="ss(this,'morning')">I plan outfits the night before — every detail matters</div>
+      <div class="sopt" data-v="mood" onclick="ss(this,'morning')">I dress for my mood — some days minimal, some days maximalist</div>
+      <div class="sopt" data-v="statement" onclick="ss(this,'morning')">I build around one statement piece every time</div>
+      <div class="sopt" data-v="formula" onclick="ss(this,'morning')">I have a formula that I remix — same vibe, different pieces</div>
+    </div>
+  </div>
+  <div class="cta"><button class="btnp" id="n1" onclick="go('s2')" disabled>Next</button></div>
+</div>
+
+<!-- S2: Lifestyle -->
+<div id="s2" style="display:none">
+  <div class="hero">
+    <div class="eyebrow">Step 2 of 4</div>
+    <h1 class="htitle">Your life<br><em>& energy</em></h1>
+    <p class="hsub">Your life shapes your style. What you do, where you go, and how you move through the world all matter.</p>
+  </div>
+  <div class="deco"><hr><span></span><hr></div>
+  <div class="card">
+    <div class="ql">Your weekend looks like</div>
+    <div class="qt">Where are you most in your element?</div>
+    <div class="chips" id="weekend-c">
+      <div class="chip" data-v="farmers market" onclick="mc(this,'weekend')">Farmers market</div>
+      <div class="chip" data-v="art gallery" onclick="mc(this,'weekend')">Art gallery</div>
+      <div class="chip" data-v="coffee shop" onclick="mc(this,'weekend')">Coffee shop</div>
+      <div class="chip" data-v="hiking outdoors" onclick="mc(this,'weekend')">Hiking / outdoors</div>
+      <div class="chip" data-v="concert or festival" onclick="mc(this,'weekend')">Concert or festival</div>
+      <div class="chip" data-v="brunch with friends" onclick="mc(this,'weekend')">Brunch with friends</div>
+      <div class="chip" data-v="thrift shopping" onclick="mc(this,'weekend')">Thrift shopping</div>
+      <div class="chip" data-v="city exploring" onclick="mc(this,'weekend')">Exploring the city</div>
+      <div class="chip" data-v="gym or studio" onclick="mc(this,'weekend')">Gym or fitness studio</div>
+      <div class="chip" data-v="cozy at home" onclick="mc(this,'weekend')">Cozy at home</div>
+      <div class="chip" data-v="rooftop or bar" onclick="mc(this,'weekend')">Rooftop or bar</div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:10px">
+    <div class="ql">Style icon energy</div>
+    <div class="qt">Which figure's energy speaks to you?</div>
+    <div class="chips" id="icon-c">
+      <div class="chip" data-v="Audrey Hepburn" onclick="mc(this,'icon')">Audrey Hepburn</div>
+      <div class="chip" data-v="Stevie Nicks" onclick="mc(this,'icon')">Stevie Nicks</div>
+      <div class="chip" data-v="Rihanna" onclick="mc(this,'icon')">Rihanna</div>
+      <div class="chip" data-v="Kate Moss" onclick="mc(this,'icon')">Kate Moss</div>
+      <div class="chip" data-v="Zendaya" onclick="mc(this,'icon')">Zendaya</div>
+      <div class="chip" data-v="Frida Kahlo" onclick="mc(this,'icon')">Frida Kahlo</div>
+      <div class="chip" data-v="Alexa Chung" onclick="mc(this,'icon')">Alexa Chung</div>
+      <div class="chip" data-v="Solange Knowles" onclick="mc(this,'icon')">Solange Knowles</div>
+      <div class="chip" data-v="Chloe Sevigny" onclick="mc(this,'icon')">Chloe Sevigny</div>
+      <div class="chip" data-v="Princess Diana" onclick="mc(this,'icon')">Princess Diana</div>
+      <div class="chip" data-v="Iris Apfel" onclick="mc(this,'icon')">Iris Apfel</div>
+      <div class="chip" data-v="Sofia Richie" onclick="mc(this,'icon')">Sofia Richie</div>
+    </div>
+  </div>
+  <div class="cta"><button class="btng" onclick="go('s1')">Back</button><button class="btnp" id="n2" onclick="go('s3')" disabled>Next</button></div>
+</div>
+
+<!-- S3: Wardrobe -->
+<div id="s3" style="display:none">
+  <div class="hero">
+    <div class="eyebrow">Step 3 of 4</div>
+    <h1 class="htitle">Your<br><em>wardrobe</em></h1>
+    <p class="hsub">What you already love tells us everything. These are the pieces and instincts that reveal your true aesthetic.</p>
+  </div>
+  <div class="deco"><hr><span></span><hr></div>
+  <div class="card">
+    <div class="ql">Your most-worn pieces</div>
+    <div class="qt">What lives at the front of your closet?</div>
+    <div class="chips" id="pieces-c">
+      <div class="chip" data-v="flowy midi dresses" onclick="mc(this,'pieces')">Flowy midi dresses</div>
+      <div class="chip" data-v="oversized blazers" onclick="mc(this,'pieces')">Oversized blazers</div>
+      <div class="chip" data-v="vintage band tees" onclick="mc(this,'pieces')">Vintage band tees</div>
+      <div class="chip" data-v="high-waisted trousers" onclick="mc(this,'pieces')">High-waisted trousers</div>
+      <div class="chip" data-v="slip dresses" onclick="mc(this,'pieces')">Slip dresses</div>
+      <div class="chip" data-v="linen or cotton basics" onclick="mc(this,'pieces')">Linen or cotton basics</div>
+      <div class="chip" data-v="leather or faux leather" onclick="mc(this,'pieces')">Leather or faux leather</div>
+      <div class="chip" data-v="cozy knits and sweaters" onclick="mc(this,'pieces')">Cozy knits and sweaters</div>
+      <div class="chip" data-v="graphic tees" onclick="mc(this,'pieces')">Graphic tees</div>
+      <div class="chip" data-v="structured tailoring" onclick="mc(this,'pieces')">Structured tailoring</div>
+      <div class="chip" data-v="athletic wear" onclick="mc(this,'pieces')">Athletic or activewear</div>
+      <div class="chip" data-v="floral prints" onclick="mc(this,'pieces')">Floral prints</div>
+      <div class="chip" data-v="denim everything" onclick="mc(this,'pieces')">Denim everything</div>
+      <div class="chip" data-v="statement coats" onclick="mc(this,'pieces')">Statement coats</div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:10px">
+    <div class="ql">Accessories vibe</div>
+    <div class="qt">How do you accessorize?</div>
+    <div class="chips" id="acc-c">
+      <div class="chip" data-v="layered gold necklaces" onclick="mc(this,'acc')">Layered gold necklaces</div>
+      <div class="chip" data-v="minimal stud earrings" onclick="mc(this,'acc')">Minimal studs</div>
+      <div class="chip" data-v="chunky statement jewelry" onclick="mc(this,'acc')">Chunky statement jewelry</div>
+      <div class="chip" data-v="silk scarves" onclick="mc(this,'acc')">Silk scarves</div>
+      <div class="chip" data-v="vintage or antique pieces" onclick="mc(this,'acc')">Vintage or antique pieces</div>
+      <div class="chip" data-v="hoop earrings" onclick="mc(this,'acc')">Hoop earrings</div>
+      <div class="chip" data-v="belts to cinch" onclick="mc(this,'acc')">Belts to cinch</div>
+      <div class="chip" data-v="hats and headwear" onclick="mc(this,'acc')">Hats and headwear</div>
+      <div class="chip" data-v="bags are my statement" onclick="mc(this,'acc')">Bags are my statement</div>
+      <div class="chip" data-v="stacked rings" onclick="mc(this,'acc')">Stacked rings</div>
+      <div class="chip" data-v="no accessories ever" onclick="mc(this,'acc')">Minimal — barely any</div>
+    </div>
+  </div>
+  <div class="cta"><button class="btng" onclick="go('s2')">Back</button><button class="btnp" id="n3" onclick="go('s4')" disabled>Next</button></div>
+</div>
+
+<!-- S4: Aesthetic -->
+<div id="s4" style="display:none">
+  <div class="hero">
+    <div class="eyebrow">Step 4 of 4</div>
+    <h1 class="htitle">Your<br><em>aesthetic</em></h1>
+    <p class="hsub">Pick the aesthetic worlds that speak to you. You can be a blend — most people are.</p>
+  </div>
+  <div class="deco"><hr><span></span><hr></div>
+  <div class="card">
+    <div class="ql">Visual worlds you're drawn to</div>
+    <div class="qt">Select all that feel like you — even partially</div>
+    <div class="mood-grid" id="mood-g">
+
+      <div class="mood-card" data-v="Romantic" onclick="tMood(this)">
+        <div class="mood-visual" style="background:linear-gradient(135deg,#F2D9E0,#E8C4C4)">
+          <svg width="40" height="40" viewBox="0 0 40 40"><path d="M20 34 C20 34 6 24 6 14 C6 8 11 4 16 6 C18 7 20 10 20 10 C20 10 22 7 24 6 C29 4 34 8 34 14 C34 24 20 34 20 34Z" fill="#C97B7B" opacity=".7"/></svg>
+        </div>
+        <div class="mood-label">Romantic</div>
+        <div class="mood-sub">Floral, feminine, dreamy</div>
+      </div>
+
+      <div class="mood-card" data-v="Bohemian" onclick="tMood(this)">
+        <div class="mood-visual" style="background:linear-gradient(135deg,#E8D5B0,#C4A870)">
+          <svg width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="12" fill="none" stroke="#8A6830" stroke-width="1.5"/><path d="M20 8 L20 32 M8 20 L32 20 M11 11 L29 29 M29 11 L11 29" stroke="#8A6830" stroke-width="1" opacity=".6"/></svg>
+        </div>
+        <div class="mood-label">Bohemian</div>
+        <div class="mood-sub">Free-spirited, earthy, layered</div>
+      </div>
+
+      <div class="mood-card" data-v="Minimalist" onclick="tMood(this)">
+        <div class="mood-visual" style="background:linear-gradient(135deg,#F0EDE8,#D8D4CE)">
+          <svg width="40" height="40" viewBox="0 0 40 40"><rect x="10" y="16" width="20" height="8" rx="2" fill="#888880" opacity=".5"/></svg>
+        </div>
+        <div class="mood-label">Minimalist</div>
+        <div class="mood-sub">Clean, quiet, intentional</div>
+      </div>
+
+      <div class="mood-card" data-v="Vintage" onclick="tMood(this)">
+        <div class="mood-visual" style="background:linear-gradient(135deg,#E8D8C0,#C8A878)">
+          <svg width="40" height="40" viewBox="0 0 40 40"><rect x="12" y="10" width="16" height="20" rx="2" fill="none" stroke="#8A6040" stroke-width="1.5"/><path d="M16 10 L16 6 M24 10 L24 6" stroke="#8A6040" stroke-width="1.5" stroke-linecap="round"/><path d="M15 18 L25 18 M15 22 L22 22" stroke="#8A6040" stroke-width="1"/></svg>
+        </div>
+        <div class="mood-label">Vintage / Retro</div>
+        <div class="mood-sub">Nostalgic, curated, storied</div>
+      </div>
+
+      <div class="mood-card" data-v="Edgy" onclick="tMood(this)">
+        <div class="mood-visual" style="background:linear-gradient(135deg,#2A2826,#4A4440)">
+          <svg width="40" height="40" viewBox="0 0 40 40"><polygon points="20,8 34,28 6,28" fill="none" stroke="#C9C2B6" stroke-width="1.5"/></svg>
+        </div>
+        <div class="mood-label">Edgy / Streetwear</div>
+        <div class="mood-sub">Bold, urban, rebellious</div>
+      </div>
+
+      <div class="mood-card" data-v="Artsy" onclick="tMood(this)">
+        <div class="mood-visual" style="background:linear-gradient(135deg,#D8C8E8,#B8A8D0)">
+          <svg width="40" height="40" viewBox="0 0 40 40"><circle cx="14" cy="14" r="6" fill="#9880B8" opacity=".5"/><circle cx="26" cy="14" r="6" fill="#E8A0A0" opacity=".5"/><circle cx="20" cy="24" r="6" fill="#A8C8B0" opacity=".5"/></svg>
+        </div>
+        <div class="mood-label">Artsy / Eclectic</div>
+        <div class="mood-sub">Creative, unexpected, layered</div>
+      </div>
+
+      <div class="mood-card" data-v="Classic" onclick="tMood(this)">
+        <div class="mood-visual" style="background:linear-gradient(135deg,#E8E0D0,#C8C0B0)">
+          <svg width="40" height="40" viewBox="0 0 40 40"><rect x="14" y="8" width="12" height="24" rx="2" fill="none" stroke="#6A6055" stroke-width="1.5"/><path d="M14 16 L26 16" stroke="#6A6055" stroke-width="1"/></svg>
+        </div>
+        <div class="mood-label">Classic / Chic</div>
+        <div class="mood-sub">Timeless, polished, refined</div>
+      </div>
+
+      <div class="mood-card" data-v="Cottagecore" onclick="tMood(this)">
+        <div class="mood-visual" style="background:linear-gradient(135deg,#D8E8C8,#B8D0A0)">
+          <svg width="40" height="40" viewBox="0 0 40 40"><path d="M20 10 Q14 16 14 24 Q14 30 20 32 Q26 30 26 24 Q26 16 20 10Z" fill="#8AAA70" opacity=".6"/><circle cx="20" cy="18" r="4" fill="#E8C8A0" opacity=".7"/></svg>
+        </div>
+        <div class="mood-label">Cottagecore</div>
+        <div class="mood-sub">Floral, pastoral, soft</div>
+      </div>
+
+      <div class="mood-card" data-v="Athleisure" onclick="tMood(this)">
+        <div class="mood-visual" style="background:linear-gradient(135deg,#D0D8E8,#A8B8D0)">
+          <svg width="40" height="40" viewBox="0 0 40 40"><path d="M12 16 L20 8 L28 16 L28 28 L12 28Z" fill="none" stroke="#5880A8" stroke-width="1.5"/><path d="M16 28 L16 34 M24 28 L24 34" stroke="#5880A8" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="mood-label">Athleisure / Sporty</div>
+        <div class="mood-sub">Active, functional, sleek</div>
+      </div>
+
+      <div class="mood-card" data-v="Androgynous" onclick="tMood(this)">
+        <div class="mood-visual" style="background:linear-gradient(135deg,#D8D8D8,#B0B0B0)">
+          <svg width="40" height="40" viewBox="0 0 40 40"><rect x="12" y="12" width="16" height="16" rx="1" fill="none" stroke="#606060" stroke-width="1.5"/><path d="M20 12 L20 8 M28 12 L32 8 M28 20 L32 20" stroke="#606060" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="mood-label">Androgynous</div>
+        <div class="mood-sub">Gender-fluid, sharp, cool</div>
+      </div>
+
+    </div>
+  </div>
+  <div class="cta"><button class="btng" onclick="go('s3')">Back</button><button class="btnp" id="n4" onclick="analyze()" disabled>Find my aesthetic</button></div>
+</div>
+
+<!-- LOADING -->
+<div id="loading" style="display:none">
+  <div class="loading"><div class="ring"></div><p class="ltxt" id="lmsg">Defining your aesthetic...</p></div>
+</div>
+
+<!-- RESULT -->
+<div id="result" style="display:none">
+  <div class="rwrap" id="result-inner" style="margin-top:20px"></div>
+</div>
+
+</div>
+
+<script>
+const API_KEY = 'YOUR_API_KEY_HERE';
+const S = {color:null,morning:null,weekend:[],icon:[],pieces:[],acc:[],mood:[]};
+
+// ── Full aesthetic database ──
+const AESTHETICS = {
+  'Romantic':{
+    tagline:'You dress the way a love letter reads — soft, intentional, and full of feeling.',
+    words:'Feminine · Dreamy · Delicate · Tender · Ethereal',
+    bannerBg:'linear-gradient(135deg,#C97B7B,#D4A0A8)',
+    palette:[{n:'Dusty rose',h:'#E8B8C0'},{n:'Blush',h:'#F4C8CC'},{n:'Lavender',h:'#C8B8D8'},{n:'Ivory',h:'#F8F2EC'},{n:'Mauve',h:'#C09098'},{n:'Soft sage',h:'#B8C8B8'}],
+    keyPieces:['Flowy midi dresses','Lace blouses','Puff-sleeve tops','Floral prints','Wrap dresses','Pearl details','Silk slip dresses','Delicate knitwear'],
+    accessories:'Delicate pearl jewelry, thin gold chains, silk hair ribbons, small structured handbags, strappy heels',
+    hair:'Soft waves or loose braids · floral hair clips · romantic updos · wispy face-framing pieces',
+    makeup:'Dewy luminous skin · rosy blush on cheeks and nose · glossy pink or berry lip · soft lash lift · no harsh lines',
+    stylistNote:'Your aesthetic lives in the soft details — the flutter of a sleeve, the weight of lace, a shade that looks like a garden after rain. You don\'t chase trends; you cultivate beauty.',
+    anthroLinks:[
+      {label:'Shop romantic dresses at Anthropologie',url:'https://www.anthropologie.com/dresses?color=pink'},
+      {label:'Shop floral & feminine pieces',url:'https://www.anthropologie.com/clothing?feature=floral'},
+      {label:'Shop Anthropologie style guide — romantic',url:'https://www.anthropologie.com/stories-style'}
+    ]
+  },
+  'Bohemian':{
+    tagline:'You wear the world like a second skin — layered, lived-in, and effortlessly free.',
+    words:'Free-spirited · Earthy · Layered · Artisanal · Wanderer',
+    bannerBg:'linear-gradient(135deg,#C4982A,#8A7840)',
+    palette:[{n:'Rust',h:'#C4582A'},{n:'Mustard',h:'#C4982A'},{n:'Olive',h:'#8A9040'},{n:'Warm cream',h:'#EEE0C0'},{n:'Terracotta',h:'#C07858'},{n:'Sage',h:'#889878'}],
+    keyPieces:['Flowy maxi skirts','Embroidered tops','Fringe jackets','Tiered dresses','Bell-bottom jeans','Peasant blouses','Crochet or lace pieces','Woven textures'],
+    accessories:'Layered necklaces, coin pendants, hoop earrings, floppy wide-brim hats, woven bags, stacked bracelets, rings on every finger',
+    hair:'Loose waves or braids · flower crowns · boho updos with loose pieces · natural texture celebrated',
+    makeup:'Sun-kissed bronzed skin · warm terracotta or peachy-nude lip · natural mascara · earthy eyeshadow in copper or bronze · freckles celebrated',
+    stylistNote:'Your wardrobe is a collection of stories — every piece has a meaning, a memory, or a mood. You dress like someone who has been everywhere and carried a piece of each place home.',
+    anthroLinks:[
+      {label:'Shop boho dresses at Anthropologie',url:'https://www.anthropologie.com/festival-ethereal-boho-curation'},
+      {label:'Shop Anthropologie boho tops',url:'https://www.anthropologie.com/festival-ethereal-boho-curation?attributionProductType=Tops'},
+      {label:'Shop Anthropologie boho skirts',url:'https://www.anthropologie.com/festival-ethereal-boho-curation?attributionProductType=Skirts'}
+    ]
+  },
+  'Minimalist':{
+    tagline:'You know that the most powerful thing in a room is often the quietest.',
+    words:'Intentional · Clean · Refined · Understated · Precise',
+    bannerBg:'linear-gradient(135deg,#888780,#4A4840)',
+    palette:[{n:'Bone',h:'#EDE8E0'},{n:'Warm white',h:'#F8F4EE'},{n:'Camel',h:'#C4A060'},{n:'Stone grey',h:'#A8A498'},{n:'Charcoal',h:'#3A3830'},{n:'True black',h:'#1A1714'}],
+    keyPieces:['Tailored trousers','Crisp white shirts','Structured blazers','Column dresses','Quality basics','Straight-leg jeans','Cashmere knits','Simple slip skirts'],
+    accessories:'Thin gold hoops, architectural rings, a perfect leather tote, sleek ankle boots — one piece at a time, chosen with purpose',
+    hair:'Sleek straight or natural · low bun or blunt cut · clean and unfussy · nothing competes with the outfit',
+    makeup:'Skin-first glow · soft contour · clean liner · tinted moisturizer · one feature at a time — either lip or eye, never both',
+    stylistNote:'Your style is a study in restraint and the quiet confidence that comes from knowing exactly who you are. Every piece earns its place.',
+    anthroLinks:[
+      {label:'Shop minimalist dresses at Anthropologie',url:'https://www.anthropologie.com/dresses?color=beige'},
+      {label:'Shop clean basics and essentials',url:'https://www.anthropologie.com/clothing?color=white'},
+      {label:'Shop neutral tones',url:'https://www.anthropologie.com/clothing?color=beige'}
+    ]
+  },
+  'Vintage':{
+    tagline:'You see clothing as history — each piece a chapter from a story worth keeping.',
+    words:'Nostalgic · Curated · Storied · Romantic · Timeless',
+    bannerBg:'linear-gradient(135deg,#C4902A,#8A6030)',
+    palette:[{n:'Champagne',h:'#D8C090'},{n:'Dusty mauve',h:'#B89098'},{n:'Warm brown',h:'#907048'},{n:'Vintage white',h:'#F0E8D8'},{n:'Burgundy',h:'#803040'},{n:'Forest',h:'#486038'}],
+    keyPieces:['A-line midi skirts','Vintage-wash denim','Retro prints','Cat-eye frames','High-waisted everything','Peter Pan collar blouses','Cardigan sets','Structured handbags'],
+    accessories:'Vintage brooches, pearl strings, cat-eye sunglasses, structured vintage bags, Mary Janes or kitten heels, silk headscarves',
+    hair:'Victory rolls · soft pin curls · headscarf or headband · blunt fringe · setting spray and vintage waves',
+    makeup:'A bold red lip is everything · cat-eye flick · powdered complexion · rose cheeks · defined brow arch — the full vintage portrait',
+    stylistNote:'You don\'t follow trends because you know trends are just history repeating itself. Your wardrobe is a carefully curated archive of beauty across decades.',
+    anthroLinks:[
+      {label:'Shop vintage-inspired at Anthropologie',url:'https://www.anthropologie.com/stories-style'},
+      {label:'Shop retro prints and patterns',url:'https://www.anthropologie.com/clothing?feature=printed'},
+      {label:'Shop Anthropologie new arrivals',url:'https://www.anthropologie.com/new-clothes'}
+    ]
+  },
+  'Edgy':{
+    tagline:'You walk into a room and change the temperature. Your style is a statement, always.',
+    words:'Bold · Urban · Rebellious · Confident · Fearless',
+    bannerBg:'linear-gradient(135deg,#2A2826,#504840)',
+    palette:[{n:'True black',h:'#0A0A0A'},{n:'Graphite',h:'#383830'},{n:'Red',h:'#C02020'},{n:'White',h:'#F8F8F8'},{n:'Tan leather',h:'#C09858'},{n:'Chrome',h:'#C0C0C0'}],
+    keyPieces:['Leather or faux leather jacket','Black moto boots','Graphic tees','Ripped or distressed denim','Oversized blazers','Bodycon silhouettes','Bold outerwear','Platform shoes'],
+    accessories:'Chunky silver chains, black chokers, studded belts, dark sunglasses, bold ear cuffs, combat boots, structured crossbody',
+    hair:'Undone texture · bedhead waves · sharp fringe · bold color or streaks · or sleek and sharp — no in between',
+    makeup:'Smoky eye in black or deep brown · strong brow · cool-toned liner · dark lip or glossy red · skin is the canvas',
+    stylistNote:'Fashion is political for you — it\'s how you claim space, speak without words, and show the world exactly how much you refuse to be contained.',
+    anthroLinks:[
+      {label:'Shop bold and edgy pieces at Anthropologie',url:'https://www.anthropologie.com/clothing?color=black'},
+      {label:'Shop graphic and statement pieces',url:'https://www.anthropologie.com/new-clothes'},
+      {label:'Shop Anthropologie style stories',url:'https://www.anthropologie.com/stories-style'}
+    ]
+  },
+  'Artsy':{
+    tagline:'Your wardrobe is your canvas. Every outfit is a composition — intentional and completely your own.',
+    words:'Creative · Eclectic · Unexpected · Layered · Original',
+    bannerBg:'linear-gradient(135deg,#8870B8,#C09898)',
+    palette:[{n:'Rust',h:'#C06040'},{n:'Cobalt',h:'#2848A8'},{n:'Mustard',h:'#C4982A'},{n:'Forest',h:'#386038'},{n:'Mauve',h:'#C09090'},{n:'Ivory',h:'#F0E8D8'}],
+    keyPieces:['Mixed-print combinations','Sculptural silhouettes','Artisan jewelry','Unexpected textures','Statement coats','Wide-leg trousers','Artist smocks','Hand-painted or printed pieces'],
+    accessories:'Oversized sculptural earrings, unusual rings, vintage brooches in unexpected places, artist tote bags, wide-brim hats, colorful scarves as clothing',
+    hair:'Expressive and personal · natural texture or vibrant color · whatever the art calls for · often not quite "done" on purpose',
+    makeup:'A single bold moment — one graphic liner, one vivid lip, one unexpected color · skin can be bare or fully painted depending on the mood',
+    stylistNote:'You dress the way great art is made — with instinct, surprise, and a total commitment to your own vision over anyone else\'s opinion.',
+    anthroLinks:[
+      {label:'Shop eclectic & unique pieces at Anthropologie',url:'https://www.anthropologie.com/new-clothes'},
+      {label:'Shop bold prints and colors',url:'https://www.anthropologie.com/clothing?feature=printed'},
+      {label:'Shop Anthropologie accessories',url:'https://www.anthropologie.com/accessories'}
+    ]
+  },
+  'Classic':{
+    tagline:'You\'ve always known that real style never goes out of fashion — it was never in fashion to begin with.',
+    words:'Polished · Timeless · Refined · Elegant · Confident',
+    bannerBg:'linear-gradient(135deg,#8A8068,#C0B0A0)',
+    palette:[{n:'Navy',h:'#1A2848'},{n:'Cream',h:'#F0E8D8'},{n:'Camel',h:'#C4A060'},{n:'Red',h:'#B83030'},{n:'Black',h:'#1A1714'},{n:'Soft white',h:'#F8F4F0'}],
+    keyPieces:['Tailored blazers','Crisp white button-downs','A-line midi skirts','Trench coats','Quality denim','Silk blouses','Classic loafers or pumps','The perfect little black dress'],
+    accessories:'Pearl earrings or simple diamond studs, thin gold watch, structured leather handbag, silk scarf, classic belt — understated and always right',
+    hair:'Blowout or natural straight · sleek low ponytail · classic chignon · nothing that fights the outfit',
+    makeup:'Barely-there skin · fresh mascara · a clean liner flick · classic red or soft nude lip · powder-finish perfection',
+    stylistNote:'You dress with quiet authority. You know that the right pieces, worn well, communicate everything — and that real elegance is always in the edit, not the addition.',
+    anthroLinks:[
+      {label:'Shop classic and timeless pieces at Anthropologie',url:'https://www.anthropologie.com/clothing?color=navy'},
+      {label:'Shop tailored and polished styles',url:'https://www.anthropologie.com/new-clothes'},
+      {label:'Shop Anthropologie style stories',url:'https://www.anthropologie.com/stories-style'}
+    ]
+  },
+  'Cottagecore':{
+    tagline:'You believe getting dressed should feel like stepping into a fairytale — soft, natural, and deeply joyful.',
+    words:'Pastoral · Whimsical · Nature-loving · Gentle · Warm',
+    bannerBg:'linear-gradient(135deg,#8AAA70,#C0A878)',
+    palette:[{n:'Sage',h:'#889878'},{n:'Butter',h:'#EED8A0'},{n:'Dusty rose',h:'#D8A8A8'},{n:'Cream',h:'#F0E8D8'},{n:'Terracotta',h:'#C07858'},{n:'Moss',h:'#707848'}],
+    keyPieces:['Prairie dresses','Floral midi or maxi dresses','Lace-trim blouses','Puff sleeves','Pinafore aprons','Knit cardigans','Floral smocked dresses','Mary Janes'],
+    accessories:'Wicker or woven bags, floral hair clips, pearl or pressed-flower jewelry, cotton socks with mary janes, floral headbands, garden gloves as accent',
+    hair:'Braids and plaits · loose natural waves · floral hair pins · half-up with ribbon · gentle and undone',
+    makeup:'No-makeup makeup · flushed rosy cheeks · freckles or pressed-on · soft pink lip · dewy luminous skin · feeling like you just came in from the garden',
+    stylistNote:'You see beauty in the slow and the simple — a well-made dress, a morning in the garden, the right light through lace curtains. Your wardrobe is a love letter to nature.',
+    anthroLinks:[
+      {label:'Shop floral and cottagecore at Anthropologie',url:'https://www.anthropologie.com/clothing?feature=floral'},
+      {label:'Shop boho and pastoral dresses',url:'https://www.anthropologie.com/festival-ethereal-boho-curation'},
+      {label:'Shop Anthropologie feminine pieces',url:'https://www.anthropologie.com/dresses?color=pink'}
+    ]
+  },
+  'Athleisure':{
+    tagline:'You move through the world like you own it — comfortable, capable, and always ready for whatever comes next.',
+    words:'Active · Functional · Sleek · Modern · Confident',
+    bannerBg:'linear-gradient(135deg,#3858A0,#5880C0)',
+    palette:[{n:'Navy',h:'#1A2848'},{n:'White',h:'#F8F8F8'},{n:'Charcoal',h:'#383838'},{n:'Cobalt',h:'#2848A8'},{n:'Sage',h:'#889878'},{n:'Mauve',h:'#C09898'}],
+    keyPieces:['High-waisted leggings','Sleek sports bras','Oversized hoodies','Track pants','Tennis skirts','Bomber jackets','Fitted athletic tees','Monochrome sets'],
+    accessories:'Clean white sneakers, mini crossbody, sporty sunglasses, baseball cap, delicate studs, smart watch — functional is the foundation',
+    hair:'Slick ponytail · clean bun · natural texture · effortlessly out-of-the-way but intentional',
+    makeup:'SPF-first skin · mascara only · maybe a tinted lip balm · the "I woke up like this but actually trained for it" look',
+    stylistNote:'Your aesthetic says: I take care of myself, I know what works for me, and I refuse to choose between beautiful and functional.',
+    anthroLinks:[
+      {label:'Shop activewear at Anthropologie',url:'https://www.anthropologie.com/clothing?feature=activewear'},
+      {label:'Shop casual and sporty styles',url:'https://www.anthropologie.com/new-clothes'},
+      {label:'Shop Maeve collection',url:'https://www.anthropologie.com/shop-maeve'}
+    ]
+  },
+  'Androgynous':{
+    tagline:'You wear clothes the way language works at its best — precisely, powerfully, and beyond category.',
+    words:'Gender-fluid · Sharp · Cool · Architectural · Bold',
+    bannerBg:'linear-gradient(135deg,#606060,#909090)',
+    palette:[{n:'Charcoal',h:'#383838'},{n:'White',h:'#F8F8F8'},{n:'Tan',h:'#C4A060'},{n:'Cobalt',h:'#2848A8'},{n:'Black',h:'#0A0A0A'},{n:'Stone',h:'#A8A098'}],
+    keyPieces:['Tailored wide-leg trousers','Oversized structured blazers','Oxford shirts','Menswear suiting','Straight-leg jeans','Turtlenecks','Flat loafers or oxfords','Clean white tees'],
+    accessories:'Minimalist watches, architectural cufflinks, clean leather belt, flat cap or fedora, structured bag, silver or no jewelry at all',
+    hair:'Sharp geometric cut · slicked back · clean lines · natural and unadorned · whatever the face needs',
+    makeup:'Skin clarity is everything · strong defined brow · clean liner · nothing fussy or overtly feminine · sharp and intentional',
+    stylistNote:'Your wardrobe is a quiet revolution — a daily refusal to dress for anyone else\'s expectations. You wear clothes that fit the body you have and the person you are.',
+    anthroLinks:[
+      {label:'Shop tailored and structured pieces at Anthropologie',url:'https://www.anthropologie.com/clothing?color=black'},
+      {label:'Shop clean and architectural styles',url:'https://www.anthropologie.com/new-clothes'},
+      {label:'Shop Anthropologie style stories',url:'https://www.anthropologie.com/stories-style'}
+    ]
+  }
+};
+
+// ── Icon → aesthetic mapping ──
+const ICON_MAP = {
+  'Audrey Hepburn':'Classic','Stevie Nicks':'Bohemian','Rihanna':'Edgy',
+  'Kate Moss':'Edgy','Zendaya':'Edgy','Frida Kahlo':'Artsy','Alexa Chung':'Vintage',
+  'Solange Knowles':'Artsy','Chloe Sevigny':'Vintage','Princess Diana':'Classic',
+  'Iris Apfel':'Artsy','Sofia Richie':'Minimalist'
+};
+
+// ── Color → aesthetic mapping ──
+const COLOR_MAP = {
+  'neutrals':'Minimalist','earth':'Bohemian','pastels':'Romantic','jewel':'Classic',
+  'bold':'Edgy','monochrome':'Androgynous','mixed':'Artsy'
+};
+
+// ── Weekend → aesthetic mapping ──
+const WEEKEND_MAP = {
+  'farmers market':'Cottagecore','art gallery':'Artsy','coffee shop':'Vintage',
+  'hiking outdoors':'Athleisure','concert or festival':'Bohemian',
+  'brunch with friends':'Romantic','thrift shopping':'Vintage',
+  'city exploring':'Edgy','gym or studio':'Athleisure','cozy at home':'Cottagecore',
+  'rooftop or bar':'Classic'
+};
+
+function mc(el,k){el.classList.toggle('sel');const v=el.dataset.v;const i=S[k].indexOf(v);i>-1?S[k].splice(i,1):S[k].push(v);vld()}
+function ss(el,k){el.closest('.slist').querySelectorAll('.sopt').forEach(o=>o.classList.remove('sel'));el.classList.add('sel');S[k]=el.dataset.v;vld()}
+function tMood(el){el.classList.toggle('sel');const v=el.dataset.v;const i=S.mood.indexOf(v);i>-1?S.mood.splice(i,1):S.mood.push(v);const n4=document.getElementById('n4');if(n4)n4.disabled=S.mood.length===0}
+
+function vld(){
+  const ok1=S.color&&S.morning;
+  const ok2=S.weekend.length>0&&S.icon.length>0;
+  const ok3=S.pieces.length>0&&S.acc.length>0;
+  ['n1','n2','n3'].forEach((id,i)=>{const el=document.getElementById(id);if(el)el.disabled=![ok1,ok2,ok3][i]});
+}
+
+function go(id){
+  ['s1','s2','s3','s4','loading','result'].forEach(x=>{const el=document.getElementById(x);if(el)el.style.display=x===id?'':'none'});
+  window.scrollTo(0,0);
+}
+
+const MSGS=['Defining your aesthetic...','Reading your style signals...','Building your profile...','Almost there...'];
+function cycleMsgs(el,msgs){let i=0;el.textContent=msgs[0];return setInterval(()=>{i=(i+1)%msgs.length;el.textContent=msgs[i];},2000)}
+
+function determineAesthetics(){
+  const scores={};
+  const add=(ae,pts)=>{scores[ae]=(scores[ae]||0)+pts};
+
+  // Color instinct (high weight)
+  if(S.color&&COLOR_MAP[S.color])add(COLOR_MAP[S.color],3);
+
+  // Mood selections (high weight)
+  S.mood.forEach(m=>add(m,4));
+
+  // Icons
+  S.icon.forEach(ic=>{if(ICON_MAP[ic])add(ICON_MAP[ic],2)});
+
+  // Weekend activities
+  S.weekend.forEach(w=>{if(WEEKEND_MAP[w])add(WEEKEND_MAP[w],1)});
+
+  // Pieces
+  const pieceMap={'flowy midi dresses':'Romantic','oversized blazers':'Classic',
+    'vintage band tees':'Vintage','high-waisted trousers':'Classic','slip dresses':'Minimalist',
+    'linen or cotton basics':'Minimalist','leather or faux leather':'Edgy',
+    'cozy knits and sweaters':'Cottagecore','graphic tees':'Edgy','structured tailoring':'Classic',
+    'athletic wear':'Athleisure','floral prints':'Romantic','denim everything':'Vintage',
+    'statement coats':'Artsy'};
+  S.pieces.forEach(p=>{if(pieceMap[p])add(pieceMap[p],1.5)});
+
+  // Sort by score
+  const sorted=Object.entries(scores).sort((a,b)=>b[1]-a[1]);
+  const primary=sorted[0]?.[0]||'Romantic';
+  const secondary=sorted[1]?.[0]||null;
+  return{primary,secondary};
+}
+
+async function analyze(){
+  go('loading');
+  const el=document.getElementById('lmsg');
+  const timer=cycleMsgs(el,MSGS);
+
+  const{primary,secondary}=determineAesthetics();
+  const ae=AESTHETICS[primary]||AESTHETICS['Romantic'];
+
+  let personalNote=ae.stylistNote;
+
+  if(API_KEY&&API_KEY!=='YOUR_API_KEY_HERE'){
+    try{
+      const prompt=`You are a personal stylist writing a short, warm, editorial style profile. A client has: color preference=${S.color}, morning routine=${S.morning}, weekend activities=${S.weekend.join(', ')}, style icons=${S.icon.join(', ')}, key wardrobe pieces=${S.pieces.join(', ')}, accessories=${S.acc.join(', ')}, aesthetic moods=${S.mood.join(', ')}. Their primary aesthetic is ${primary}. Write JSON: "personalNote" (2 sentences that feel like a personal, specific note to THIS person about their style identity — warm and editorial, mentioning some of their actual selections). No preamble.`;
+      const resp=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':API_KEY,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:300,messages:[{role:'user',content:prompt}]})});
+      const data=await resp.json();
+      const txt=data.content.map(b=>b.text||'').join('').replace(/```json|```/g,'').trim();
+      const ai=JSON.parse(txt);
+      if(ai.personalNote)personalNote=ai.personalNote;
+    }catch(e){}
+  }
+
+  clearInterval(timer);
+  render(primary,secondary,ae,personalNote);
+}
+
+function render(primary,secondary,ae,personalNote){
+  const secData=secondary&&AESTHETICS[secondary]?AESTHETICS[secondary]:null;
+  const palHtml='<div class="pal-row">'+ae.palette.map(p=>`<div><div class="pswatch" style="background:${p.h}"></div><div class="pname">${p.n}</div></div>`).join('')+'</div>';
+  const itemPills=ae.keyPieces.map(p=>`<span class="item-pill">${p}</span>`).join('');
+
+  document.getElementById('result-inner').innerHTML=`
+    <div class="rbadge">Your style aesthetic</div>
+    <h2 class="rtitle"><em>${primary}</em></h2>
+    <p class="rtagline">${ae.tagline}</p>
+
+    <div class="aesthetic-banner" style="background:${ae.bannerBg}">
+      <div class="banner-text">
+        <div class="banner-title">${primary}</div>
+        <div class="banner-words">${ae.words}</div>
+      </div>
+    </div>
+
+    <div class="nbar">
+      <div class="nlbl">Your style note</div>
+      <div class="nbody">${personalNote}</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="rcard">
+      <div class="rlbl">Your color palette</div>
+      ${palHtml}
+    </div>
+
+    <div class="rcard">
+      <div class="rlbl">Your key pieces</div>
+      <div class="item-row">${itemPills}</div>
+    </div>
+
+    <div class="rcard">
+      <div class="rlbl">Accessories</div>
+      <div class="nbody plain" style="color:var(--charcoal)">${ae.accessories}</div>
+    </div>
+
+    <div class="rcard">
+      <div class="rlbl">Hair & makeup</div>
+      <div class="hm-grid">
+        <div class="hm-card">
+          <div class="hm-title">Hair</div>
+          <div class="hm-body">${ae.hair}</div>
+        </div>
+        <div class="hm-card">
+          <div class="hm-title">Makeup</div>
+          <div class="hm-body">${ae.makeup}</div>
+        </div>
+      </div>
+    </div>
+
+    ${secData?`<div class="secondary-section">
+      <div class="sec-title">You also have a strong ${secondary} side</div>
+      <div class="sec-body">Your ${secondary} influence shows up in your love of ${secData.words.toLowerCase()}. Don't be afraid to blend — the most interesting style lives at the intersection of two aesthetics.</div>
+    </div>`:''}
+
+    <div class="divider"></div>
+
+    <div class="anthro-section">
+      <div class="anthro-title">Shop your aesthetic at Anthropologie</div>
+      <div class="anthro-sub">Pieces curated to match your ${primary} signature style.</div>
+      <div class="alinks">
+        ${ae.anthroLinks.map(l=>`<a class="alink" href="${l.url}" target="_blank"><span class="alink-txt">${l.label}</span><span class="alink-arr">→</span></a>`).join('')}
+        <a class="alink" href="https://www.anthropologie.com/accessories" target="_blank"><span class="alink-txt">Shop accessories at Anthropologie</span><span class="alink-arr">→</span></a>
+      </div>
+    </div>
+
+    <button class="restart" onclick="restart()">Start over</button>`;
+  go('result');
+}
+
+function restart(){
+  Object.keys(S).forEach(k=>S[k]=Array.isArray(S[k])?[]:null);
+  document.querySelectorAll('.chip,.sopt,.mood-card').forEach(el=>el.classList.remove('sel'));
+  go('s1');vld();
+  const n4=document.getElementById('n4');if(n4)n4.disabled=true;
+}
+</script>
+</body>
+</html>
